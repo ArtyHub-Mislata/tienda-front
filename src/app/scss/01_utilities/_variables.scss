@@ -1,95 +1,325 @@
+$color-principal: (
+  1: #140119,
+  2: #300539,
+  3: #510B5B,
+  4: #6F1278,
+  5: #901796,
+  6: #B61BB6,
+  7: #E01AD9,
+  8: #EE2FDE,
+  9: #FA47E5
+);
+
+$color-alternativo: (
+  1: #190A01,
+  2: #3D1D05,
+  3: #5F330C,
+  4: #804C14,
+  5: #A2651A,
+  6: #C7841F,
+  7: #E5A02A,
+  8: #F0BB47,
+  9: #FBD065
+);
+
+$color-azul: (
+  1: #1E3B8A,
+  2: #1E3FAE,
+  3: #1D4FD7,
+  4: #2463EB,
+  5: #3C83F6,
+  6: #61A6FA,
+  7: #91C3FD,
+  8: #BEDBFE,
+  9: #DCEBFE
+);
+
+$color-rojo: (
+  1: #811D1D,
+  2: #981B1B,
+  3: #BA1C1C,
+  4: #DC2828,
+  5: #EF4343,
+  6: #F87272,
+  7: #FCA6A6,
+  8: #FEC8C8,
+  9: #FEE1E1
+);
+
+$color-verde: (
+  1: #064C39,
+  2: #066046,
+  3: #047756,
+  4: #059467,
+  5: #10B77F,
+  6: #36D399,
+  7: #6EE7B7,
+  8: #A5F3CF,
+  9: #D1FAE5
+);
+
+$color-gris: (
+  1: #1A1A1A,
+  2: #3E3E3E,
+  3: #565656,
+  4: #676767,
+  5: #787878,
+  6: #858585,
+  7: #929292,
+  8: #9F9F9F,
+  9: #ABABAB
+);
+
+$color-blanco: (
+  1: #B5B5B5,
+  2: #BFBFBF,
+  3: #C9C9C9,
+  4: #D3D3D3,
+  5: #DDDDDD,
+  6: #E6E6E6,
+  7: #EFEFEF,
+  8: #F7F7F7,
+  9: #FFFFFF
+);
+
+$color-amarillo: (
+  1: #76350F,
+  2: #91400D,
+  3: #B35309,
+  4: #DB7706,
+  5: #F59F0A,
+  6: #FBBD23,
+  7: #FCD44F,
+  8: #FDE68B,
+  9: #FEF3C8
+);
+
+$fonts-map: (
+  open-sans: ('Open Sans', Arial, sans-serif),
+  noto-sans-arabic: ('Noto Sans Arabic', Arial, sans-serif),
+  montserrat-arabic: ('Montserrat', Arial, sans-serif),
+  questrial: ('Questrial', Arial, sans-serif),
+  default: var(--mlt-sys-font-open-sans)
+);
+
+$font-sizes-map: (
+  1: 10px,
+  2: 12px,
+  3: 14px,
+  4: 16px,
+  5: 18px,
+  6: 20px,
+  7: 22px,
+  8: 24px,
+  9: 26px
+);
+
+$font-weights-map: (
+  regular: 400,
+  medium: 500,
+  semibold: 600,
+  bold: 700
+);
+
+$margin-map: (
+  0: 0px,
+  1: 4px,
+  2: 8px,
+  3: 12px,
+  4: 16px,
+  5: 20px,
+  6: 24px,
+  7: 28px,
+  8: 32px,
+  9: 36px
+);
+
+$padding-map: (
+  0: 0px,
+  1: 4px,
+  2: 8px,
+  3: 12px,
+  4: 16px,
+  5: 20px,
+  6: 24px,
+  7: 28px,
+  8: 32px,
+  9: 36px,
+  10: 40px
+);
+
+$border-radius-map: (
+  1: 1px,
+  2: 2px,
+  3: 4px,
+  4: 6px
+);
+
+$width-map: (
+  0: 0px,
+  1: 1px,
+  2: 4px,
+  3: 8px,
+  4: 12px,
+  5: 16px,
+  6: 20px,
+  7: 24px,
+  8: 28px,
+  9: 32px,
+  10: 100px,
+  100: 100%,
+  400: 400px,
+  420: 420px,
+  500: 500px,
+  600: 600px,
+  800: 800px,
+  1100: 1100px,
+  1200: 1200px
+);
+
+$height-map: (
+  0: 0px,
+  1: 1px,
+  2: 4px,
+  3: 8px,
+  4: 12px,
+  5: 16px,
+  6: 20px,
+  7: 24px,
+  8: 28px,
+  9: 32px,
+  10: 100px,
+  100: 100%
+);
+
+$shadows-map: (
+  sm: (0 1px 2px 0 rgb(0 0 0 / 0.05)),
+  md: (
+    0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1)
+  ),
+  lg: (
+    0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1)
+  )
+);
+
+$gap-map: (
+  1: 4px,
+  2: 8px,
+  3: 12px,
+  4: 16px,
+  5: 20px,
+  6: 24px,
+  7: 28px,
+  8: 32px,
+  9: 36px
+);
+
 :root {
-    --mlt-sys-color-principal-1: #9a3286;
-    --mlt-sys-color-principal-2: #a64495;
-    --mlt-sys-color-principal-3: #b355a4;
-    --mlt-sys-color-principal-4: #bf65b3;
-    --mlt-sys-color-principal-5: #cc75c2;
-    --mlt-sys-color-principal-6: #d986d1;
-    --mlt-sys-color-principal-7: #e596e0;
-    --mlt-sys-color-principal-8: #f2a6f0;
-    --mlt-sys-color-principal-9: #ffb7ff;
+  @each $name, $value in $color-principal {
+    --mlt-sys-color-principal-#{$name}: #{$value};
+  }
 
 
 
-    --mlt-sys-color-alternativo-1: #1C1E01;
-    --mlt-sys-color-alternativo-2: #4B520A;
-    --mlt-sys-color-alternativo-3: #728019;
-    --mlt-sys-color-alternativo-4: #90A72A;
-    --mlt-sys-color-alternativo-5: #AFCD42;
-    --mlt-sys-color-alternativo-6: #BFDB70;
-    --mlt-sys-color-alternativo-7: #D4EC9D;
-    --mlt-sys-color-alternativo-8: #E8F9C8;
-    --mlt-sys-color-alternativo-9: #FFFFFF;
+  @each $name, $value in $color-alternativo {
+    --mlt-sys-color-alternativo-#{$name}: #{$value};
+  }
 
 
 
-    --mlt-sys-color-azul-1: #1E3B8A;
-    --mlt-sys-color-azul-2: #1E3FAE;
-    --mlt-sys-color-azul-3: #1D4FD7;
-    --mlt-sys-color-azul-4: #2463EB;
-    --mlt-sys-color-azul-5: #3C83F6;
-    --mlt-sys-color-azul-6: #61A6FA;
-    --mlt-sys-color-azul-7: #91C3FD;
-    --mlt-sys-color-azul-8: #BEDBFE;
-    --mlt-sys-color-azul-9: #DCEBFE;
+  @each $name, $value in $color-azul {
+    --mlt-sys-color-azul-#{$name}: #{$value};
+  }
 
 
 
-    --mlt-sys-color-rojo-1: #811D1D;
-    --mlt-sys-color-rojo-2: #981B1B;
-    --mlt-sys-color-rojo-3: #BA1C1C;
-    --mlt-sys-color-rojo-4: #DC2828;
-    --mlt-sys-color-rojo-5: #EF4343;
-    --mlt-sys-color-rojo-6: #F87272;
-    --mlt-sys-color-rojo-7: #FCA6A6;
-    --mlt-sys-color-rojo-8: #FEC8C8;
-    --mlt-sys-color-rojo-9: #FEE1E1;
+  @each $name, $value in $color-rojo {
+    --mlt-sys-color-rojo-#{$name}: #{$value};
+  }
 
 
 
-    --mlt-sys-color-verde-1: #064C39;
-    --mlt-sys-color-verde-2: #066046;
-    --mlt-sys-color-verde-3: #047756;
-    --mlt-sys-color-verde-4: #059467;
-    --mlt-sys-color-verde-5: #10B77F;
-    --mlt-sys-color-verde-6: #36D399;
-    --mlt-sys-color-verde-7: #6EE7B7;
-    --mlt-sys-color-verde-8: #A5F3CF;
-    --mlt-sys-color-verde-9: #D1FAE5;
+  @each $name, $value in $color-verde {
+    --mlt-sys-color-verde-#{$name}: #{$value};
+  }
 
 
 
-    --mlt-sys-color-gris-1: #1A1A1A;
-    --mlt-sys-color-gris-2: #3E3E3E;
-    --mlt-sys-color-gris-3: #565656;
-    --mlt-sys-color-gris-4: #676767;
-    --mlt-sys-color-gris-5: #787878;
-    --mlt-sys-color-gris-6: #858585;
-    --mlt-sys-color-gris-7: #929292;
-    --mlt-sys-color-gris-8: #9F9F9F;
-    --mlt-sys-color-gris-9: #ABABAB;
+  @each $name, $value in $color-gris {
+    --mlt-sys-color-gris-#{$name}: #{$value};
+  }
 
 
 
-    --mlt-sys-color-blanco-1: #B5B5B5;
-    --mlt-sys-color-blanco-2: #BFBFBF;
-    --mlt-sys-color-blanco-3: #C9C9C9;
-    --mlt-sys-color-blanco-4: #D3D3D3;
-    --mlt-sys-color-blanco-5: #DDDDDD;
-    --mlt-sys-color-blanco-6: #E6E6E6;
-    --mlt-sys-color-blanco-7: #EFEFEF;
-    --mlt-sys-color-blanco-8: #F7F7F7;
-    --mlt-sys-color-blanco-9: #FFFFFF;
+  @each $name, $value in $color-blanco {
+    --mlt-sys-color-blanco-#{$name}: #{$value};
+  }
 
 
 
-    --mlt-sys-color-amarillo-1: #76350F;
-    --mlt-sys-color-amarillo-2: #91400D;
-    --mlt-sys-color-amarillo-3: #B35309;
-    --mlt-sys-color-amarillo-4: #DB7706;
-    --mlt-sys-color-amarillo-5: #F59F0A;
-    --mlt-sys-color-amarillo-6: #FBBD23;
-    --mlt-sys-color-amarillo-7: #FCD44F;
-    --mlt-sys-color-amarillo-8: #FDE68B;
-    --mlt-sys-color-amarillo-9: #FEF3C8;
+  @each $name, $value in $color-amarillo {
+    --mlt-sys-color-amarillo-#{$name}: #{$value};
+  }
+    
+
+  
+  @each $name, $value in $fonts-map {
+      --mlt-sys-font-#{$name}: #{$value};
+  }
+
+
+
+  @each $num, $size in $font-sizes-map {
+      --mlt-sys-font-size-#{$num}: #{$size};
+  }
+
+
+
+  @each $name, $weight in $font-weights-map {
+      --mlt-sys-font-weight-#{$name}: #{$weight};
+  }
+
+
+
+  @each $num, $margin in $margin-map {
+      --mlt-sys-margin-#{$num}: #{$margin};
+  }
+
+
+
+  @each $num, $padding in $padding-map {
+      --mlt-sys-padding-#{$num}: #{$padding};
+  }
+
+
+
+  @each $num, $border-radius in $border-radius-map {
+      --mlt-sys-border-radius-#{$num}: #{$border-radius};
+  }
+
+
+
+  @each $num, $width in $width-map {
+      --mlt-sys-width-#{$num}: #{$width};
+  }
+
+
+
+  @each $num, $height in $height-map {
+      --mlt-sys-height-#{$num}: #{$height};
+  }
+
+
+
+  @each $num, $gap in $gap-map {
+      --mlt-sys-gap-#{$num}: #{$gap};
+  }
+
+
+
+  @each $name, $shadow in $shadows-map {
+      --mlt-sys-shadow-#{$name}: #{$shadow};
+  }
 }
