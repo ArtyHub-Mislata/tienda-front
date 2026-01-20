@@ -6,14 +6,15 @@ import { CategoryPage } from './components/pages/category-page/category-page';
 import { LoginPage } from './components/pages/login-page/login-page';
 import { LogoutPage } from './components/pages/logout-page/logout-page';
 import { ProfilePage } from './components/pages/profile-page/profile-page';
+import { loginGuardGuard } from './guards/login-guard-guard';
 
 export const routes: Routes = [
     {path: "", component: ArtworkListPage},
 
-    {path: "artworks/:id", component: ArtworkPage, canActivate: [logInGuardGuard]},
+    {path: "artworks/:id", component: ArtworkPage, canActivate: [loginGuardGuard]},
     
-    {path: "categories", component: CategoryListPage, canActivate: [logInGuardGuard]},
-    {path: "categories/:id", component: CategoryPage, canActivate: [logInGuardGuard]},
+    {path: "categories", component: CategoryListPage, canActivate: [loginGuardGuard]},
+    {path: "categories/:id", component: CategoryPage, canActivate: [loginGuardGuard]},
     
     {path:"login", component: LoginPage},
     {path:"logout", component: LogoutPage},
