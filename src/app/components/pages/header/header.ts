@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ChangeDetectorRef, Component } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { UserModel } from '../../../models/UserModel';
+import { HttpService } from '../../../services/http-service';
 
 @Component({
   selector: 'header',

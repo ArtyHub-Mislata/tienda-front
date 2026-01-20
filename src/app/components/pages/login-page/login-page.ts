@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { FormsModule, NgForm } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import { CButton } from '../../ui/c-button/c-button';
+import { CredentialModel } from '../../../models/CredentialModel';
+import { HttpService } from '../../../services/http-service';
 
 @Component({
   selector: 'login-page',

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { CategoryModel } from '../../../models/CategoryModel';
+import { ActivatedRoute } from '@angular/router';
+import { HttpService } from '../../../services/http-service';
 
 @Component({
   selector: 'category-page',

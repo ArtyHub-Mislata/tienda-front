@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { HttpService } from '../../../services/http-service';
+import { UserModel } from '../../../models/UserModel';
+import { ArtworkModel } from '../../../models/ArtworkModel';
 
 @Component({
   selector: 'profile-page',
@@ -9,7 +12,7 @@ import { RouterLink } from '@angular/router';
 })
 export class ProfilePage {
   user?: UserModel;
-  artworks: ArtWorkModel[] = [];
+  artworks: ArtworkModel[] = [];
 
   constructor(private httpService: HttpService, private router: Router) {
     

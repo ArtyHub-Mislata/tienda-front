@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CButton } from '../../ui/c-button/c-button';
+import { CategoryModel } from '../../../models/CategoryModel';
+import { HttpService } from '../../../services/http-service';
 
 @Component({
   selector: 'category-list-page',

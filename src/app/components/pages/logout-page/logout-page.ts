@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CButton } from '../../ui/c-button/c-button';
+import { HttpService } from '../../../services/http-service';
 
 @Component({
   selector: 'logout-page',

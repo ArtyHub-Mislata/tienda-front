@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CButton } from '../../ui/c-button/c-button';
+import { PageResponse } from '../../../models/PageResponseModel';
+import { ArtworkModel } from '../../../models/ArtworkModel';
+import { HttpService } from '../../../services/http-service';
 
 @Component({
   selector: 'artwork-list-page',
@@ -9,7 +12,7 @@ import { CButton } from '../../ui/c-button/c-button';
   styleUrl: './artwork-list-page.scss',
 })
 export class ArtworkListPage {
-  artworkList!: PageResponse<ArtWorkModel>
+  artworkList!: PageResponse<ArtworkModel>
 
   constructor(private httpService: HttpService){
 
