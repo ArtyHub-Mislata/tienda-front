@@ -4,10 +4,11 @@ import { CButton } from '../../ui/c-button/c-button';
 import { PageResponse } from '../../../models/PageResponseModel';
 import { ArtworkModel } from '../../../models/ArtworkModel';
 import { HttpService } from '../../../services/http-service';
+import { Chatbot } from "../chatbot/chatbot";
 
 @Component({
   selector: 'artwork-list-page',
-  imports: [RouterLink, CButton],
+  imports: [RouterLink, CButton, Chatbot],
   templateUrl: './artwork-list-page.html',
   styleUrl: './artwork-list-page.scss',
 })

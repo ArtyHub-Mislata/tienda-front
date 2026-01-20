@@ -1,0 +1,12 @@
+<div class="chat-wrapper" [class.open]="isOpen">
+  <button class="chat-button" (click)="toggleChatbot()">
+    @if (!isOpen) {
+      <img src="assets/img/chatbot.png" alt="Chatbot">
+    } @else {
+      <span>✖</span>
+    }
+  </button>
+  <div class="chat-window">
+    <iframe [src]="chatbotUrl" frameborder="0"></iframe>
+  </div>
+</div>
