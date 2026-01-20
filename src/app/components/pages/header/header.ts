@@ -4,7 +4,7 @@ import { UserModel } from '../../../models/UserModel';
 import { HttpService } from '../../../services/http-service';
 
 @Component({
-  selector: 'header',
+  selector: 'c-header',
   imports: [RouterLink],
   templateUrl: './header.html',
   styleUrl: './header.scss',
