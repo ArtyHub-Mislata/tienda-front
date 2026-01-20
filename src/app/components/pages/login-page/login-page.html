@@ -1,0 +1,64 @@
+<div class="l-flex l-flex--justify-center g--margin-top-5">
+    <div class="c-card g--padding-4">
+
+        <h3 class="c-card__title g--margin-bottom-5">
+            Iniciar sesión
+        </h3>
+
+        <form (ngSubmit)="onLogin(loginForm)" #loginForm="ngForm">
+            <div class="g--margin-bottom-5">
+                <label class="form-label">Email</label>
+                <input 
+                    type="email" 
+                    class="form-control" 
+                    [(ngModel)]="credential.email" 
+                    name="email"
+                    required
+                    email
+                    #emailCtrl="ngModel">
+
+                @if (emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)) {
+                    <div class="alert alert-warning">
+                        El formato del email que has introducido no es correcto. Introduce un formato valido
+                    </div>
+                }
+
+            </div>
+
+            <div class="g--margin-bottom-5">
+                <label class="form-label">Contraseña</label>
+                <input 
+                    type="password" 
+                    class="form-control" 
+                    [(ngModel)]="credential.password" 
+                    name="password"
+                    required
+                    #passwordCtrl="ngModel">
+
+                @if (passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)) {
+                    <div class="alert alert-warning">
+                        La contraseña debe tener al menos 8 caracteres
+                    </div>
+                }
+            </div>
+
+            @if (generalError) {
+                <div class="alert alert-warning text-center">
+                    {{ generalError }}
+                </div>
+            }
+
+            <div class="l-flex l-flex--justify-between">
+                <a c-button funcion="alternativa" importancia="terciaria" tamano="mediano"
+                    routerLink="/">
+                    Volver
+                </a>
+
+                <button c-button funcion="normal" importancia="primaria" tamano="mediano"
+                    [disabled]="loginForm.invalid">
+                    Entrar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

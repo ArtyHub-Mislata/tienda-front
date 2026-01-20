@@ -1,0 +1,73 @@
+<div class="l-flex l-flex--justify-center g--margin-top-5">
+    <div class="c-card g--width-1200">
+        <div class="c-card__body">
+
+            <h3 class="c-card__title g--margin-bottom-5">
+                Listado de Artworks
+            </h3>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped align-middle text-center">
+                    <thead class="table-light">
+                        <tr>
+                            <th>ID</th>
+                            <th>NOMBRE</th>
+                            <th>DESCRIPCIÓN</th>
+                            <th>IMAGEN</th>
+                            <th>PRECIO</th>
+                            <th>CATEGORÍA</th>
+                            <th>USUARIO</th>
+                            <th>ACCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (artworkList) {
+                            @for (artwork of artworkList.data; track artwork.id) {
+                                <tr>
+                                    <td>{{ artwork.id }}</td>
+
+                                    <td>
+                                        <a routerLink="/artworks/{{ artwork.id }}" class="fw-semibold">
+                                            <u>{{ artwork.name }}</u>
+                                        </a>
+                                    </td>
+
+                                    <td class="text-start">
+                                        {{ artwork.description }}
+                                    </td>
+
+                                    <td>
+                                        <img
+                                            src="{{ artwork.image }}"
+                                            width="100"
+                                            class="img-fluid rounded"
+                                            alt="Artwork image">
+                                    </td>
+
+                                    <td class="g--font-questrial">{{ artwork.price }}$</td>
+                                    <td>{{ artwork.categoryDto.name }}</td>
+                                    <td>
+                                        <a routerLink="/users/{{ artwork.userDto.id }}">
+                                            <u>{{ artwork.userDto.name }}</u>
+                                        </a>
+                                    </td>
+
+                                    <td class="l-flex l-flex--justify-center l-flex--gap-2">
+                                        <a c-button funcion="alternativa" importancia="secundaria" tamano="pequeno"
+                                            routerLink="/artworks/{{ artwork.id }}/edit">
+                                            Modificar
+                                        </a>
+                                        <a c-button funcion="peligrosa" importancia="terciaria" tamano="pequeno"
+                                            routerLink="/artworks/{{ artwork.id }}/delete">
+                                            Borrar
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

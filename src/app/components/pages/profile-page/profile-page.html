@@ -1,0 +1,66 @@
+@if(user) {
+    <div class="l-flex l-flex--justify-center g--margin-top-5 l-flex--gap-5">
+
+        <div class="l-flex l-flex--justify-center g--margin-bottom-4">
+            <div class="c-card g--width-400">
+                <img 
+                    [src]="user.imageProfileUrl" 
+                    class="card-img-top img-fluid" 
+                    alt="Imagen de perfil">
+
+                <div class="c-card__body">
+                    <h5 class="c-card__title">{{ user.name }}</h5>
+                    <p class="c-card__text">{{ user.description }}</p>
+                    <p class="c-card__text"><strong>Email:</strong> {{ user.email }}</p>
+                    <p class="c-card__text"><strong>Dirección:</strong> {{ user.address }}</p>
+                    <span class="badge bg-primary">{{ user.role }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <h2 class="c-card__title g--margin-bottom-5">Obras del usuario</h2>
+            <table class="table table-bordered table-striped align-middle text-center">
+                <thead class="table-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Imagen</th>
+                        <th>Precio</th>
+                        <th>Categoría</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (artwork of artworks; track artwork.id) {
+                        <tr>
+                            <td>{{ artwork.id }}</td>
+                            <td>
+                                <a routerLink="/artworks/{{artwork.id}}" class="fw-semibold text-decoration-none">
+                                    <u>{{ artwork.name }}</u>
+                                </a>
+                            </td>
+                            <td class="text-start">{{ artwork.description }}</td>
+                            <td>
+                                <img src="{{artwork.image}}" width="100" class="img-fluid rounded" alt="Artwork image">
+                            </td>
+                            <td class="g--font-questrial">{{ artwork.price }}$</td>
+                            <td>{{ artwork.categoryDto.name }}</td>
+                            <td class="l-flex l-flex--justify-center l-flex--gap-2">
+                                <a c-button funcion="alternativa" importancia="secundaria" tamano="pequeno"
+                                    routerLink="/artworks/{{artwork.id}}/edit">
+                                    Modificar
+                                </a>
+                                <a c-button funcion="peligrosa" importancia="terciaria" tamano="pequeno"
+                                    routerLink="/artworks/{{artwork.id}}/delete">
+                                    Borrar
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}

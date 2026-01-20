@@ -1,0 +1,43 @@
+@if (artwork) {
+    <div class="l-flex l-flex--justify-center g--margin-top-5">
+        <div class="c-card g--width-420">
+
+            <img
+                [src]="artwork.image"
+                class="card-img-top img-fluid"
+                alt="Artwork image">
+
+            <div class="c-card__body">
+
+                <h5 class="c-card__title c-card__title-m3">
+                    {{ artwork.name }}
+                </h5>
+
+                <p class="c-card__text">
+                    {{ artwork.description }}
+                </p>
+
+                <hr>
+
+                <p class="c-card__text c-card__text-m3 g--font-questrial">
+                    <strong>Precio:</strong> {{ artwork.price }}$
+                </p>
+
+                <div class="l-flex l-flex--justify-between l-flex--align-center">
+                    <span class="text-muted">
+                        Categoría: {{ artwork.categoryDto.name }}
+                    </span>
+
+                    <a
+                        routerLink="/users/{{ artwork.userDto.id }}"
+                        class="text-decoration-none fw-semibold">
+                        <u>{{ artwork.userDto.name }}</u>
+                    </a>
+                </div>
+            </div>
+            <a c-button funcion="alternativa" importancia="secundaria" tamano="mediano" class="g--margin-top-5" routerLink="/artworks">
+                Volver
+            </a>
+        </div>
+    </div>
+}

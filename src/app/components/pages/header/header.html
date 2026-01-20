@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark px-4">
+    <div class="container-fluid">
+
+        <a class="navbar-brand fw-bold g--font-montserrat-arabic" [style.color]="'purple'" href="#">
+            Artyhub Admin
+        </a>
+
+        <button 
+            class="navbar-toggler" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#navbarNav" 
+            aria-controls="navbarNav" 
+            aria-expanded="false" 
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="artworks">Artworks</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="categories">Categorías</a>
+                </li>
+                @if(isLogged){
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="profile">{{user?.name}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link g--font-noto-sans-arabic" routerLink="login" (click)="logOut()">Log Out</a>
+                    </li>
+                }
+                @else{
+                    <li class="nav-item">
+                        <a class="nav-link g--font-noto-sans-arabic" routerLink="login">Log In</a>
+                    </li>
+                }
+            </ul>
+        </div>
+
+    </div>
+</nav>
