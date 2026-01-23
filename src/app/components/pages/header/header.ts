@@ -13,42 +13,44 @@ import { CategoryModel } from '../../../models/CategoryModel';
 })
 export class Header {
   isLogged: boolean = false;
-  user?: UserModel;
+  user!: UserModel;
   showLogoutMessage: boolean = false;
   isHiding: boolean = false;
   comprobarCierre: boolean = false;
   menuVisible: boolean = false;
   categories!: CategoryModel[];
 
-  constructor(private httpService: HttpService, private router: Router, private cd: ChangeDetectorRef) {
-    
-  }
-  ngOnInit(){
+  constructor(
+    private httpService: HttpService,
+    private router: Router,
+    private cd: ChangeDetectorRef,
+  ) {}
+  ngOnInit() {
     this.httpService.isLogged$.subscribe({
-      next: (isLogged) =>{
+      next: (isLogged) => {
         this.isLogged = isLogged;
         this.cd.detectChanges();
-      }
-    })
+      },
+    });
     this.httpService.getUser().subscribe({
       next: (user) => {
-        this.user = user;
+        if (user) this.user = user;
         this.cd.detectChanges();
-      }
-    })
+      },
+    });
     this.httpService.getAllCategories().subscribe({
       next: (categories) => {
         this.categories = categories.data;
         this.cd.detectChanges();
-      }
-    })
-  }  
+      },
+    });
+  }
 
-  logOut(){
+  logOut() {
     this.comprobarCierre = true;
   }
 
-  onLogout(){
+  onLogout() {
     this.comprobarCierre = false;
     this.showLogoutMessage = true;
     this.isHiding = false;

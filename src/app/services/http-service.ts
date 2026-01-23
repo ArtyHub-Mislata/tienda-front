@@ -8,51 +8,56 @@ import { UserModel } from '../models/UserModel';
 import { CredentialModel } from '../models/CredentialModel';
 import { map } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HttpService {
-  btnIsLogged = new BehaviorSubject<boolean>(this.hasToken());
-  isLogged$ = this.btnIsLogged.asObservable();
-
   categorySelected = new BehaviorSubject<string>('Todas');
   currentCategory$ = this.categorySelected.asObservable();
 
-  private url = "http://localhost:8080/api"
+  private url = 'http://localhost:8080/api';
 
-  constructor(private httpClient: HttpClient){}
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router,
+  ) {}
 
   //CRUD ARTWORKS
-  
-  getArtworksByCategoryId(id:string): Observable<PageResponse<ArtworkModel>> {
-    return this.httpClient.get<PageResponse<ArtworkModel>>(`${this.url}/categories/${id}/artworks`)
+
+  getArtworksByCategoryId(id: string): Observable<PageResponse<ArtworkModel>> {
+    return this.httpClient.get<PageResponse<ArtworkModel>>(`${this.url}/categories/${id}/artworks`);
   }
 
-  getAllArtworks(): Observable<PageResponse<ArtworkModel>>{
-    return this.httpClient.get<PageResponse<ArtworkModel>>(`${this.url}/artworks?page=1&size=10`)
-  }
-  
-  getArtWorkById(id:string):Observable<ArtworkModel>{
-    return this.httpClient.get<ArtworkModel>(`${this.url}/artworks/${id}`)
+  getAllArtworks(): Observable<PageResponse<ArtworkModel>> {
+    return this.httpClient.get<PageResponse<ArtworkModel>>(`${this.url}/artworks?page=1&size=10`);
   }
 
-  getAllArtworksOfUser(id:string): Observable<PageResponse<ArtworkModel>>{
-    return this.httpClient.get<PageResponse<ArtworkModel>>(`${this.url}/admin/users/${id}/artworks`)
+  getArtWorkById(id: string): Observable<ArtworkModel> {
+    return this.httpClient.get<ArtworkModel>(`${this.url}/artworks/${id}`);
+  }
+
+  getAllArtworksOfUser(id: string): Observable<PageResponse<ArtworkModel>> {
+    return this.httpClient.get<PageResponse<ArtworkModel>>(
+      `${this.url}/admin/users/${id}/artworks`,
+    );
   }
 
   //CRUD CATEGORIAS
 
-  getAllCategories(): Observable<PageResponse<CategoryModel>>{
-    return this.httpClient.get<PageResponse<CategoryModel>>(`${this.url}/categories?page=1&size=10`)
-  }
-  
-  getCategoryById(id:string):Observable<CategoryModel>{
-    return this.httpClient.get<CategoryModel>(`${this.url}/categories/${id}`)
+  getAllCategories(): Observable<PageResponse<CategoryModel>> {
+    return this.httpClient.get<PageResponse<CategoryModel>>(
+      `${this.url}/categories?page=1&size=10`,
+    );
   }
 
-  getCategoryByName(name:string):Observable<CategoryModel>{
-    return this.httpClient.get<CategoryModel>(`${this.url}/categories/name/${name}`)
+  getCategoryById(id: string): Observable<CategoryModel> {
+    return this.httpClient.get<CategoryModel>(`${this.url}/categories/${id}`);
+  }
+
+  getCategoryByName(name: string): Observable<CategoryModel> {
+    return this.httpClient.get<CategoryModel>(`${this.url}/categories/name/${name}`);
   }
 
   updateCategory(categoryName: string) {
@@ -61,24 +66,28 @@ export class HttpService {
 
   //CRUD LOGIN
 
+  private loggedSubject = new BehaviorSubject<boolean>(false);
+  isLogged$ = this.loggedSubject.asObservable();
+
   login(credential: CredentialModel): Observable<{ token: string }> {
-    return this.httpClient.post<{ token: string }>(`${this.url}/users/login`, credential)
-    .pipe(
+    return this.httpClient.post<{ token: string }>(`${this.url}/login`, credential).pipe(
       map((resp) => {
+        console.log(resp);
+
         localStorage.setItem('token', resp.token);
-        this.btnIsLogged.next(true);
+        this.loggedSubject.next(true);
         return resp;
-      })
+      }),
     );
   }
 
-  logout():Observable<void> {
-    return this.httpClient.delete<void>(`${this.url}/users/logout`)
-    .pipe(
+  logout(): Observable<void> {
+    return this.httpClient.delete<void>(`${this.url}/logout`).pipe(
       map(() => {
         localStorage.removeItem('token');
-        this.btnIsLogged.next(false);
-      })
+        this.loggedSubject.next(false);
+        this.router.navigate(['/login']);
+      }),
     );
   }
 
@@ -87,16 +96,12 @@ export class HttpService {
   }
 
   isLogged(): Observable<boolean> {
-    return this.httpClient.get<UserModel | null>(`${this.url}/users/islogged`).pipe(
-      map((user) => !!user)
-    );
+    return this.httpClient
+      .get<UserModel | null>(`${this.url}/users/islogged`)
+      .pipe(map((user) => !!user));
   }
 
-  hasToken(): boolean {
-    return !!localStorage.getItem('token');
-  }
-
-  getUser(): Observable<UserModel | undefined> {
-    return this.httpClient.get<UserModel | undefined>(`${this.url}/users/islogged`);
+  getUser(): Observable<UserModel | null> {
+    return this.httpClient.get<UserModel | null>(`${this.url}/users/islogged`);
   }
 }
