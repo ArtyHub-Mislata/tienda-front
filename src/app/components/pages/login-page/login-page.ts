@@ -35,7 +35,7 @@ export class LoginPage {
     this.authService.login(this.credential).subscribe({
       next: () => {
         this.loading = false;
-        this.router.navigate(['/']);
+        this.router.navigate(['']);
       },
       error: () => {
         this.loading = false;

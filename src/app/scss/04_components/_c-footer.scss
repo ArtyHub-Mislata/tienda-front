@@ -1,0 +1,62 @@
+@use "../01_utilities" as *;
+
+.c-footer {
+    height: var(--mlt-sys-height-70);
+    width: var(--mlt-sys-width-100);
+    background-color: var(--mlt-sys-color-principal-2);
+    color: var(--mlt-sys-color-blanco-9);
+    z-index: 1000;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+
+    &__logo-icon {
+        img {
+            width: 50px;
+            height: 50px;
+        }
+        margin-right: 11px;
+    }
+
+    &__title {
+        color: white;
+        text-decoration: none;
+        transition: color 0.2s;
+
+        &:hover {
+            color: var(--mlt-sys-color-alternativo-6);
+        }
+    }
+
+    &__link {
+        color: white;
+        text-decoration: none;
+        font-size: var(--mlt-sys-font-size-3);
+        transition: color 0.2s;
+
+        &:hover {
+            color: var(--mlt-sys-color-alternativo-6);
+            text-decoration: underline;
+        }
+    }
+
+    &__social-title {
+        font-size: var(--mlt-sys-font-size-5);
+        font-weight: var(--mlt-sys-font-weight-medium);
+    }
+
+    &__social-icon {
+        img {
+            width: 30px;
+            height: 30px;
+        }
+        transition: transform 0.2s, color 0.2s;
+
+        &:hover {
+            transform: translateY(-3px);
+            color: var(--mlt-sys-color-principal-7);
+        }
+    }
+}

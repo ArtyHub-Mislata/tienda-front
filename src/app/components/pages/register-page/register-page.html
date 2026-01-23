@@ -1,0 +1,38 @@
+<div class="c-auth l-flex l-flex--column l-flex--align-center l-flex--justify-center">
+    <h1 class="c-auth__title g--margin-bottom-7">ARTYHUB</h1>
+
+    <div class="c-auth__card g--padding-8">
+        <form class="l-flex l-flex--column l-flex--gap-4">
+            
+            <div class="c-auth__form-group">
+                <label class="c-auth__form-group-label">*Email:</label>
+                <input type="email" class="c-auth__form-group-input" placeholder="ejemplo@gmail.com">
+            </div>
+
+            <div class="c-auth__form-group">
+                <label class="c-auth__form-group-label">*Contraseña:</label>
+                <input type="password" class="c-auth__form-group-input" placeholder="**********">
+            </div>
+
+            <div class="c-auth__form-group">
+                <label class="c-auth__form-group-label">*Usuario:</label>
+                <input type="text" class="c-auth__form-group-input" placeholder="Usuario">
+            </div>
+
+            <div class="c-auth__form-group">
+                <label class="c-auth__form-group-label">Descripción:</label>
+                <textarea class="c-auth__form-group-input c-auth__form-group-input--textarea" 
+                          placeholder="Soy alguien que busca..."></textarea>
+            </div>
+
+            <div class="l-flex l-flex--justify-between g--margin-top-4">
+                <a c-button funcion="alternativa" importancia="secundaria" tamano="pequeno" routerLink="/login" class="c-auth__button--half">
+                    Volver
+                </a>
+                <button c-button funcion="normal" importancia="primaria" tamano="pequeno" class="c-auth__button--half" (click)="onRegister()">
+                    Continuar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

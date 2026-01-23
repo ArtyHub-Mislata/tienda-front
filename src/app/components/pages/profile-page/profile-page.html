@@ -1,66 +1,62 @@
 @if(user) {
-    <div class="l-flex l-flex--justify-center g--margin-top-5 l-flex--gap-5">
+<div class="l-flex l-flex--justify-center g--margin-top-9">
+    <div class="g--width-1200 l-flex l-flex--gap-6">
+        
+        <aside class="c-profile-sidebar l-flex l-flex--column l-flex--align-center g--padding-6">
+            <div class="c-profile-sidebar__avatar g--margin-bottom-5">
+                <img [src]="user.imageProfileUrl" alt="Imagen de perfil" class="img-fluid">
+            </div>
 
-        <div class="l-flex l-flex--justify-center g--margin-bottom-4">
-            <div class="c-card g--width-400">
-                <img 
-                    [src]="user.imageProfileUrl" 
-                    class="card-img-top img-fluid" 
-                    alt="Imagen de perfil">
-
-                <div class="c-card__body">
-                    <h5 class="c-card__title">{{ user.name }}</h5>
-                    <p class="c-card__text">{{ user.description }}</p>
-                    <p class="c-card__text"><strong>Email:</strong> {{ user.email }}</p>
-                    <p class="c-card__text"><strong>Dirección:</strong> {{ user.address }}</p>
-                    <span class="badge bg-primary">{{ user.role }}</span>
+            <div class="c-profile-sidebar__info l-flex l-flex--column l-flex--gap-4 g--width-100">
+                <div class="c-info-item">
+                    <span class="c-info-item__label">Nombre usuario</span>
+                    <p class="c-info-item__value">{{ user.name }}</p>
+                </div>
+                <div class="c-info-item">
+                    <span class="c-info-item__label">Email</span>
+                    <p class="c-info-item__value">{{ user.email }}</p>
+                </div>
+                <div class="c-info-item">
+                    <span class="c-info-item__label">Dirección</span>
+                    <p class="c-info-item__value">{{ user.address }}</p>
+                </div>
+                <div class="c-info-item">
+                    <span class="c-info-item__label">Descripción</span>
+                    <p class="c-info-item__value">{{ user.description }}</p>
                 </div>
             </div>
-        </div>
 
-        <div class="table-responsive">
-            <h2 class="c-card__title g--margin-bottom-5">Obras del usuario</h2>
-            <table class="table table-bordered table-striped align-middle text-center">
-                <thead class="table-light">
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Descripción</th>
-                        <th>Imagen</th>
-                        <th>Precio</th>
-                        <th>Categoría</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (artwork of artworks; track artwork.id) {
-                        <tr>
-                            <td>{{ artwork.id }}</td>
-                            <td>
-                                <a routerLink="/artworks/{{artwork.id}}" class="fw-semibold text-decoration-none">
-                                    <u>{{ artwork.name }}</u>
-                                </a>
-                            </td>
-                            <td class="text-start">{{ artwork.description }}</td>
-                            <td>
-                                <img src="{{artwork.image}}" width="100" class="img-fluid rounded" alt="Artwork image">
-                            </td>
-                            <td class="g--font-questrial">{{ artwork.price }}$</td>
-                            <td>{{ artwork.categoryDto.name }}</td>
-                            <td class="l-flex l-flex--justify-center l-flex--gap-2">
-                                <a c-button funcion="alternativa" importancia="secundaria" tamano="pequeno"
-                                    routerLink="/artworks/{{artwork.id}}/edit">
-                                    Modificar
-                                </a>
-                                <a c-button funcion="peligrosa" importancia="terciaria" tamano="pequeno"
-                                    routerLink="/artworks/{{artwork.id}}/delete">
-                                    Borrar
-                                </a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+            <div class="l-flex l-flex--column g--width-100 l-flex--gap-3 g--margin-top-9">
+                <a c-button funcion="alternativa" importancia="secundaria" tamano="mediano" 
+                   routerLink="/artworks" class="c-button--pill">
+                    Volver
+                </a>
+                <button c-button funcion="peligrosa" importancia="primaria" tamano="mediano" 
+                        class="c-button--pill c-button--danger">
+                    Cerrar sesión
+                </button>
+            </div>
+        </aside>
+
+        <main class="l-flex--1">
+            <div class="l-flex l-flex--wrap l-flex--gap-4">
+                @for (artwork of artworks; track artwork.id) {
+                    <div class="c-artwork-card c-artwork-card--small">
+                        <div class="c-artwork-card__image-container">
+                            <img [src]="artwork.image" class="c-artwork-card__img" alt="Artwork image">
+                        </div>
+                        <div class="c-artwork-card__body g--padding-3">
+                            <p class="c-artwork-card__title">{{ artwork.name }}</p>
+                            <p class="c-artwork-card__artist">Artista</p>
+                            <p class="c-artwork-card__price-tag g--font-questrial">{{ artwork.price }}€</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </main>
+
     </div>
+</div>
 }
+
+<c-chatbot></c-chatbot>

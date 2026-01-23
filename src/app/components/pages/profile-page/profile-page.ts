@@ -3,10 +3,11 @@ import { Router, RouterLink } from '@angular/router';
 import { HttpService } from '../../../services/http-service';
 import { UserModel } from '../../../models/UserModel';
 import { ArtworkModel } from '../../../models/ArtworkModel';
+import { Chatbot } from "../chatbot/chatbot";
 
 @Component({
   selector: 'profile-page',
-  imports: [RouterLink],
+  imports: [RouterLink, Chatbot],
   templateUrl: './profile-page.html',
   styleUrl: './profile-page.scss',
 })

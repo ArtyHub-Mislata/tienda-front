@@ -1,0 +1,79 @@
+@use "../01_utilities" as *;
+
+.c-header {
+    height: var(--mlt-sys-height-70);
+    width: var(--mlt-sys-width-100);
+    background-color: var(--mlt-sys-color-principal-2);
+    color: var(--mlt-sys-color-blanco-9);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+
+    &__logo-icon {
+        img {
+            width: 50px;
+            height: 50px;
+        }
+        margin-right: 11px;
+    }
+
+    &__title {
+        transition: color 0.2s;
+
+        &:hover {
+            color: var(--mlt-sys-color-alternativo-6);
+        }
+    }
+
+    &__search-btn {
+        cursor: pointer;
+        transition: transform 0.2s;
+        width: 55px;
+        height: 55px;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+
+    &__carrito-btn {
+        cursor: pointer;
+        transition: transform 0.2s;
+        img {
+            width: 40px;
+            height: 40px;
+        }
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+}
+
+.c-logout {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--mlt-sys-color-alternativo-3);
+    color: white;
+    border-radius: var(--mlt-sys-border-radius-15);
+    border-left: 5px solid var(--mlt-sys-color-alternativo-7);
+    z-index: 10000;
+    animation: slideIn 0.5s ease-out forwards;
+
+    &.is-hiding {
+        animation: slideOut 0.5s ease-in forwards;
+    }
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOut {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(100%); opacity: 0; }
+}

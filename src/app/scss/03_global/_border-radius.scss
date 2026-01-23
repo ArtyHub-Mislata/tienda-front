@@ -1,0 +1,9 @@
+@use "../01_utilities" as *;
+
+$border-radius: 1, 2, 3, 4, 5, 15, 20;
+
+@each $radius in $border-radius {
+    .g--border-radius-#{$radius} {
+        border-radius: var(--mlt-sys-border-radius-#{$radius}) !important;
+    }
+}

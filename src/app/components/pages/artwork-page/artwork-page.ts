@@ -3,10 +3,11 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CButton } from '../../ui/c-button/c-button';
 import { HttpService } from '../../../services/http-service';
 import { ArtworkModel } from '../../../models/ArtworkModel';
+import { Chatbot } from "../chatbot/chatbot";
 
 @Component({
   selector: 'artwork-page',
-  imports: [RouterLink, CButton],
+  imports: [RouterLink, CButton, Chatbot],
   templateUrl: './artwork-page.html',
   styleUrl: './artwork-page.scss',
 })

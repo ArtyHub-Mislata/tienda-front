@@ -1,12 +1,12 @@
-<div class="chat-wrapper l-flex l-flex--column l-flex--align-end l-flex--justify-center" [class.open]="isOpen">
+<div class="chat-wrapper l-flex l-flex--column l-flex--align-end l-flex--justify-center g--margin-5" [class.open]="isOpen">
   <button class="chat-button" (click)="toggleChatbot()">
     @if (!isOpen) {
-      <img src="assets/img/chatbot.png" alt="Chatbot">
+      <img src="images/chatbot.png" alt="Chatbot" class="chat-button__img"/>
     } @else {
       <span>✖</span>
     }
   </button>
   <div class="chat-window">
-    <iframe [src]="chatbotUrl" frameborder="0"></iframe>
+    <iframe [src]="safeUrl" frameborder="0"></iframe>
   </div>
 </div>

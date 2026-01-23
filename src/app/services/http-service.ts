@@ -16,7 +16,9 @@ export class HttpService {
   btnIsLogged = new BehaviorSubject<boolean>(this.hasToken());
   isLogged$ = this.btnIsLogged.asObservable();
 
-  //TODO la url y puerto deberian estar en un archivo config
+  categorySelected = new BehaviorSubject<string>('Todas');
+  currentCategory$ = this.categorySelected.asObservable();
+
   private url = "http://localhost:8080/api"
 
   constructor(private httpClient: HttpClient){}
@@ -45,8 +47,16 @@ export class HttpService {
     return this.httpClient.get<PageResponse<CategoryModel>>(`${this.url}/categories?page=1&size=10`)
   }
   
-  getCategoryId(id:string):Observable<CategoryModel>{
+  getCategoryById(id:string):Observable<CategoryModel>{
     return this.httpClient.get<CategoryModel>(`${this.url}/categories/${id}`)
+  }
+
+  getCategoryByName(name:string):Observable<CategoryModel>{
+    return this.httpClient.get<CategoryModel>(`${this.url}/categories/name/${name}`)
+  }
+
+  updateCategory(categoryName: string) {
+    this.categorySelected.next(categoryName);
   }
 
   //CRUD LOGIN
@@ -70,6 +80,10 @@ export class HttpService {
         this.btnIsLogged.next(false);
       })
     );
+  }
+
+  register(user: UserModel): Observable<UserModel> {
+    return this.httpClient.post<UserModel>(`${this.url}/users/register`, user);
   }
 
   isLogged(): Observable<boolean> {

@@ -1,0 +1,96 @@
+@use "../01_utilities" as *;
+
+.c-auth {
+    min-height: 100vh;
+    
+    &__title {
+        font-family: var(--mlt-sys-font-montserrat-arabic);
+        font-size: 40px;
+        font-weight: var(--mlt-sys-font-weight-bold);
+        letter-spacing: 5px;
+        color: var(--mlt-sys-color-blanco-9);
+    }
+
+    &__card {
+        background-color: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(15px);
+        border-radius: 30px;
+        width: 400px;
+
+        &-link {
+            color: white;
+            font-size: var(--mlt-sys-font-size-3);
+            text-decoration: underline;
+        }
+
+        &-divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            font-size: var(--mlt-sys-font-size-4);
+            &::before, &::after {
+                content: '';
+                flex: 1;
+                border-bottom: 1px solid rgba(255,255,255,0.3);
+            }
+            &::before { margin-right: 10px; }
+            &::after { margin-left: 10px; }
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+    }
+
+    &__form-group {
+        &-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: var(--mlt-sys-font-weight-medium);
+        }
+
+        &-input {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 50px;
+            border: none;
+            background-color: white;
+            color: var(--mlt-sys-color-gris-2);
+            outline: none;
+
+            &--textarea {
+            border-radius: 20px;
+            resize: none;
+            height: 80px;
+        }
+        }
+    }
+
+    &__button--auth {
+        border-radius: 50px !important;
+        transition: transform 0.3s ease;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+
+    &__button--auth-alt {
+        border-radius: 50px !important;
+        transition: transform 0.3s ease;
+        text-align: center;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+
+    &__button--half {
+        width: 48%;
+        border-radius: 50px !important;
+        transition: transform 0.3s ease;
+        text-align: center;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+}

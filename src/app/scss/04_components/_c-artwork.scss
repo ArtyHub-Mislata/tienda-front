@@ -1,0 +1,45 @@
+@use "../01_utilities" as *;
+
+.c-card-detail {
+    --artwork-background-color: var(--mlt-sys-color-principal-3);
+    --artwork-color: var(--mlt-sys-color-blanco-9);
+
+    background-color: rgba(var(--artwork-background-color), 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: var(--mlt-sys-border-radius-15);
+    color: var(--artwork-color);
+    border: 1px solid rgba(var(--artwork-color), 0.1);
+
+    &__media {
+        flex: 0 0 300px;
+    }
+
+    &__img {
+        width: var(--mlt-sys-width-100);
+        height: var(--mlt-sys-height-250);
+        object-fit: cover;
+        border-radius: var(--mlt-sys-border-radius-4);
+    }
+
+    &__content {
+        flex: 1;
+    }
+
+    &__title {
+        font-size: var(--mlt-sys-font-size-7);
+        font-weight: var(--mlt-sys-font-weight-bold);
+    }
+
+    &__author, &__category, &__description {
+        font-size: var(--mlt-sys-font-size-5);
+    }
+
+    &__author {
+        color: var(--mlt-sys-color-blanco-6);
+    }
+
+    &__price {
+        font-size: var(--mlt-sys-font-size-10);
+        font-weight: var(--mlt-sys-font-weight-medium);
+    }
+}
