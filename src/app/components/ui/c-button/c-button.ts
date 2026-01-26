@@ -5,9 +5,9 @@ import { Component, HostBinding, Input, ViewEncapsulation } from '@angular/core'
   imports: [],
   template: '<ng-content></ng-content>',
   styleUrl: './c-button.scss',
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
+  encapsulation: ViewEncapsulation.None
 })
+
 export class CButton {
   @Input() funcion:'normal' | 'alternativa' | 'peligrosa'='normal';
   @Input() importancia:'primaria' | 'secundaria' | 'terciaria'='primaria';
