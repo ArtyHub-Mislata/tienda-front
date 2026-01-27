@@ -1,38 +1,48 @@
 @if (artwork) {
-<div class="l-flex l-flex--justify-center g--margin-top-9">
+  <div class="l-flex l-flex--justify-center g--margin-top-9">
     <div class="c-card-detail g--width-800 g--padding-8">
-        
-        <div class="l-flex l-flex--gap-6">
-            <div class="c-card-detail__media">
-                <img [src]="artwork.image" class="c-card-detail__img" [alt]="artwork.name">
-            </div>
-
-            <div class="c-card-detail__content l-flex l-flex--column l-flex--gap-3">
-                <h2 class="c-card-detail__title">{{ artwork.name }}</h2>
-                <p class="c-card-detail__author">{{ artwork.userDto.name }}</p>
-                <p class="c-card-detail__category">{{ artwork.categoryDto.name }}</p>
-                <p class="c-card-detail__description">{{ artwork.description }}</p>
-            </div>
+      <div class="l-flex l-flex--gap-6">
+        <div class="c-card-detail__media">
+          <img [src]="artwork.image" class="c-card-detail__img" [alt]="artwork.name" />
         </div>
 
-        <div class="l-flex l-flex--justify-between l-flex--align-center g--margin-top-9">
-            <span class="c-card-detail__price g--font-questrial">
-                {{ artwork.price }}€
-            </span>
-
-            <div class="l-flex l-flex--gap-4">
-                <a c-button funcion="alternativa" importancia="secundaria" tamano="mediano" 
-                   routerLink="/artworks" class="g--border-radius-20 g--padding-left-6 g--padding-right-6">
-                    Volver
-                </a>
-                <button c-button funcion="normal" importancia="primaria" tamano="mediano" 
-                        class="g--border-radius-20 g--padding-left-6 g--padding-right-6">
-                    Añadir al carrito
-                </button>
-            </div>
+        <div class="c-card-detail__content l-flex l-flex--column l-flex--gap-3">
+          <h2 class="c-card-detail__title">{{ artwork.name }}</h2>
+          <p class="c-card-detail__author" routerLink="/users/{{ artwork.userDto.id }}">
+            {{ artwork.userDto.name }}
+          </p>
+          <p class="c-card-detail__category">{{ artwork.categoryDto.name }}</p>
+          <p class="c-card-detail__description">{{ artwork.description }}</p>
         </div>
+      </div>
+
+      <div class="l-flex l-flex--justify-between l-flex--align-center g--margin-top-9">
+        <span class="c-card-detail__price g--font-questrial"> {{ artwork.price }}€ </span>
+
+        <div class="l-flex l-flex--gap-4">
+          <a
+            c-button
+            funcion="alternativa"
+            importancia="secundaria"
+            tamano="mediano"
+            routerLink="/"
+            class="g--border-radius-20 g--padding-left-6 g--padding-right-6"
+          >
+            Volver
+          </a>
+          <button
+            c-button
+            funcion="normal"
+            importancia="primaria"
+            tamano="mediano"
+            class="g--border-radius-20 g--padding-left-6 g--padding-right-6"
+          >
+            Añadir al carrito
+          </button>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
 }
 
 <c-chatbot></c-chatbot>

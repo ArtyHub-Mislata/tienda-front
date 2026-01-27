@@ -12,14 +12,6 @@
             <p class="c-info-item__value">{{ user.name }}</p>
           </div>
           <div class="c-info-item">
-            <span class="c-info-item__label">Email</span>
-            <p class="c-info-item__value">{{ user.email }}</p>
-          </div>
-          <div class="c-info-item">
-            <span class="c-info-item__label">Dirección</span>
-            <p class="c-info-item__value">{{ user.address }}</p>
-          </div>
-          <div class="c-info-item">
             <span class="c-info-item__label">Descripción</span>
             <p class="c-info-item__value">{{ user.description }}</p>
           </div>
@@ -36,16 +28,6 @@
           >
             Volver
           </a>
-          <button
-            c-button
-            funcion="peligrosa"
-            importancia="primaria"
-            tamano="mediano"
-            class="c-button--pill c-button--danger"
-            (click)="logOut()"
-          >
-            Cerrar sesión
-          </button>
         </div>
       </aside>
 

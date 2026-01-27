@@ -1,26 +1,35 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
-import { HttpService } from '../../../services/http-service';
 import { UserModel } from '../../../models/UserModel';
 import { ArtworkModel } from '../../../models/ArtworkModel';
+import { HttpService } from '../../../services/http-service';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Chatbot } from '../chatbot/chatbot';
 
 @Component({
-  selector: 'profile-page',
+  selector: 'app-user-page',
   imports: [RouterLink, Chatbot],
-  templateUrl: './profile-page.html',
-  styleUrl: './profile-page.scss',
+  templateUrl: './user-page.html',
+  styleUrl: './user-page.scss',
 })
-export class ProfilePage {
+export class UserPage {
   user!: UserModel;
   artworks: ArtworkModel[] = [];
   constructor(
     private httpService: HttpService,
-    private router: Router,
+    private route: ActivatedRoute,
   ) {}
 
-  ngOnInit(): void {
-    this.httpService.getUser().subscribe({
+  ngOnInit() {
+    this.route.paramMap.subscribe((paramMap) => {
+      const id = paramMap.get('id')!;
+      if (id) {
+        this.loadUser(id);
+      }
+    });
+  }
+
+  loadUser(id: string) {
+    this.httpService.getUserById(id).subscribe({
       next: (user) => {
         if (user) {
           this.user = user;
@@ -33,13 +42,6 @@ export class ProfilePage {
     this.httpService.getAllArtworksOfUser(id).subscribe({
       next: (artworks) => {
         this.artworks = artworks.data;
-      },
-    });
-  }
-  logOut() {
-    this.httpService.logout().subscribe({
-      next: () => {
-        this.router.navigate(['/']);
       },
     });
   }
