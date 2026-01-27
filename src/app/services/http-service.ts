@@ -9,6 +9,7 @@ import { CredentialModel } from '../models/CredentialModel';
 import { catchError, map, tap } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
+import { UserRegisterRequest } from '../models/UserRegisterRequest';
 
 @Injectable({
   providedIn: 'root',
@@ -86,7 +87,7 @@ export class HttpService {
     );
   }
 
-  register(user: UserModel): Observable<UserModel> {
+  register(user: UserRegisterRequest): Observable<UserModel> {
     return this.httpClient.post<UserModel>(`${this.url}/users/register`, user);
   }
 
