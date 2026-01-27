@@ -1,9 +1,8 @@
-import { ChangeDetectorRef, Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { UserModel } from '../../../models/UserModel';
 import { HttpService } from '../../../services/http-service';
 import { FormsModule } from '@angular/forms';
-import { CategoryModel } from '../../../models/CategoryModel';
 
 @Component({
   selector: 'c-header',

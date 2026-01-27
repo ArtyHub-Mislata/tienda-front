@@ -23,10 +23,11 @@
     &__title {
         color: white;
         text-decoration: none;
-        transition: color 0.2s;
+        transition: all 0.5s;
 
         &:hover {
             color: var(--mlt-sys-color-alternativo-6);
+            transform: scale(1.05);
         }
     }
 
@@ -55,7 +56,7 @@
         transition: transform 0.2s, color 0.2s;
 
         &:hover {
-            transform: translateY(-3px);
+            transform: scale(1.1);
             color: var(--mlt-sys-color-principal-7);
         }
     }

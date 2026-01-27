@@ -278,7 +278,7 @@
     }
 
     &:hover {
-        transform: translateY(-10px);
+        transform: scale(1.03);
     }
 
     &__image-container {
@@ -306,5 +306,13 @@
 
     &__price {
         font-size: var(--artwork-list-font-size-price);
+    }
+}
+
+.c-button--show-all {
+    transition: all 0.5s ease;
+    
+    &:hover {
+        transform: scale(1.05);
     }
 }

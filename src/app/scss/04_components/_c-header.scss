@@ -17,13 +17,15 @@
             height: 50px;
         }
         margin-right: 11px;
+        cursor: pointer;
     }
 
     &__title {
-        transition: color 0.2s;
+        transition: all 0.5s;
 
         &:hover {
             color: var(--mlt-sys-color-alternativo-6);
+            transform: scale(1.05);
         }
     }
 
