@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { PageResponse } from '../models/PageResponseModel';
 import { ArtworkModel } from '../models/ArtworkModel';
 import { CategoryModel } from '../models/CategoryModel';
 import { UserModel } from '../models/UserModel';
 import { CredentialModel } from '../models/CredentialModel';
-import { map } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -39,9 +39,7 @@ export class HttpService {
   }
 
   getAllArtworksOfUser(id: string): Observable<PageResponse<ArtworkModel>> {
-    return this.httpClient.get<PageResponse<ArtworkModel>>(
-      `${this.url}/admin/users/${id}/artworks`,
-    );
+    return this.httpClient.get<PageResponse<ArtworkModel>>(`${this.url}/users/${id}/artworks`);
   }
 
   //CRUD CATEGORIAS
@@ -66,7 +64,7 @@ export class HttpService {
   isLogged$ = this.loggedSubject.asObservable();
 
   login(credential: CredentialModel): Observable<{ token: string }> {
-    return this.httpClient.post<{ token: string }>(`${this.url}/login`, credential).pipe(
+    return this.httpClient.post<{ token: string }>(`${this.url}/users/login`, credential).pipe(
       map((resp) => {
         console.log(resp);
 
@@ -78,8 +76,9 @@ export class HttpService {
   }
 
   logout(): Observable<void> {
-    return this.httpClient.delete<void>(`${this.url}/logout`).pipe(
+    return this.httpClient.delete<void>(`${this.url}/users/logout`).pipe(
       map(() => {
+        console.log('SE ESTA LOGOUTEANDO DE VERAS');
         localStorage.removeItem('token');
         this.loggedSubject.next(false);
         this.router.navigate(['/login']);
@@ -92,12 +91,21 @@ export class HttpService {
   }
 
   isLogged(): Observable<boolean> {
-    return this.httpClient
-      .get<UserModel | null>(`${this.url}/users/islogged`)
-      .pipe(map((user) => !!user));
+    return this.httpClient.get<boolean>(`${this.url}/users/islogged`).pipe(
+      tap((isLogged) => {
+        this.loggedSubject.next(isLogged);
+      }),
+      catchError(() => {
+        this.loggedSubject.next(false);
+        return of(false);
+      }),
+    );
   }
 
   getUser(): Observable<UserModel | null> {
-    return this.httpClient.get<UserModel | null>(`${this.url}/users/islogged`);
+    return this.httpClient.get<UserModel | null>(`${this.url}/users/logged`);
+  }
+  getUserById(id: string): Observable<UserModel | null> {
+    return this.httpClient.get<UserModel | null>(`${this.url}/users/${id}`);
   }
 }

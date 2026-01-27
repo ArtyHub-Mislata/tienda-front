@@ -28,14 +28,18 @@ export class Header {
       next: (isLogged) => {
         this.isLogged = isLogged;
         this.cd.detectChanges();
+        console.log('ESTA LOGUEADO' + isLogged);
       },
     });
     this.httpService.getUser().subscribe({
       next: (user) => {
         if (user) this.user = user;
         this.cd.detectChanges();
+
+        console.log('USUARIO' + user?.id);
       },
     });
+    this.httpService.isLogged().subscribe();
   }
 
   logOut() {
@@ -43,6 +47,7 @@ export class Header {
   }
 
   onLogout() {
+    console.log('SE ESTA CERRANDO SESION');
     this.comprobarCierre = false;
     this.showLogoutMessage = true;
     this.isHiding = false;
@@ -54,7 +59,7 @@ export class Header {
         this.isHiding = false;
       }, 500);
     }, 3000);
-    this.httpService.logout();
+    this.httpService.logout().subscribe();
     this.router.navigate(['/login']);
   }
 }

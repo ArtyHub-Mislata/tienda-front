@@ -5,13 +5,15 @@ import { LoginPage } from './components/pages/login-page/login-page';
 import { ProfilePage } from './components/pages/profile-page/profile-page';
 import { loginGuardGuard } from './guards/login-guard-guard';
 import { RegisterPage } from './components/pages/register-page/register-page';
+import { UserPage } from './components/pages/user-page/user-page';
 
 export const routes: Routes = [
-    {path: "", component: ArtworkListPage},
+  { path: '', component: ArtworkListPage },
 
-    {path: "artworks/:id", component: ArtworkPage, canActivate: [loginGuardGuard]},
-    
-    {path:"login", component: LoginPage},
-    {path:"register", component: RegisterPage},
-    {path:"profile", component: ProfilePage}
+  { path: 'artworks/:id', component: ArtworkPage },
+
+  { path: 'login', component: LoginPage },
+  { path: 'register', component: RegisterPage },
+  { path: 'profile', component: ProfilePage },
+  { path: 'users/:id', component: UserPage },
 ];
