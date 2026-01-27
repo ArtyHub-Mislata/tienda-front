@@ -23,6 +23,7 @@ export class Header {
     private cd: ChangeDetectorRef,
   ) {}
   ngOnInit() {
+    this.httpService.isLogged().subscribe();
     this.httpService.isLogged$.subscribe({
       next: (isLogged) => {
         this.isLogged = isLogged;
@@ -38,7 +39,6 @@ export class Header {
         console.log('USUARIO' + user?.id);
       },
     });
-    this.httpService.isLogged().subscribe();
   }
 
   logOut() {
