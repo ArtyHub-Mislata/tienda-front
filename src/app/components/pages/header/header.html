@@ -25,25 +25,6 @@
   </div>
 }
 
-@if (menuVisible) {
-  <div class="c-overlay" (click)="menuVisible = false" @fadeInOut></div>
-  <aside class="c-side-menu" [class.is-open]="menuVisible" @slideIn>
-    <h2 class="g--padding-4">Categorías</h2>
-    <nav>
-      <ul class="g--list-reset">
-        <li (click)="selectCategory('Todas')" class="c-side-menu__item">
-          Todas <i class="fas fa-chevron-right"></i>
-        </li>
-        @for (cat of categories; track cat.id) {
-          <li (click)="selectCategory(cat.name)" class="c-side-menu__item">
-            {{ cat.name }} <i class="fas fa-chevron-right"></i>
-          </li>
-        }
-      </ul>
-    </nav>
-  </aside>
-}
-
 <nav class="navbar navbar-expand-sm navbar-dark bg-color c-header">
   <div class="container-fluid">
     <div class="c-header__logo-icon">
@@ -64,17 +45,6 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link mt-2">Categorías</a>
-        </li>
-        <li class="nav-item">
-          <button class="c-header__search-btn btn text-white-50 border-0">
-            <img src="images/lupita.png" alt="Lupa búsqueda" />
-          </button>
-        </li>
-      </ul>
-
       <ul class="navbar-nav ms-auto align-items-center">
         @if (isLogged) {
           <li class="nav-item">

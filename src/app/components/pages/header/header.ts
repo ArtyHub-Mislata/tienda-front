@@ -17,8 +17,6 @@ export class Header {
   showLogoutMessage: boolean = false;
   isHiding: boolean = false;
   comprobarCierre: boolean = false;
-  menuVisible: boolean = false;
-  categories!: CategoryModel[];
 
   constructor(
     private httpService: HttpService,
@@ -38,12 +36,6 @@ export class Header {
         this.cd.detectChanges();
       },
     });
-    this.httpService.getAllCategories().subscribe({
-      next: (categories) => {
-        this.categories = categories.data;
-        this.cd.detectChanges();
-      },
-    });
   }
 
   logOut() {
@@ -54,6 +46,7 @@ export class Header {
     this.comprobarCierre = false;
     this.showLogoutMessage = true;
     this.isHiding = false;
+
     setTimeout(() => {
       this.isHiding = true;
       setTimeout(() => {
@@ -63,14 +56,5 @@ export class Header {
     }, 3000);
     this.httpService.logout();
     this.router.navigate(['/login']);
-  }
-
-  categoryMenu() {
-    this.menuVisible = !this.menuVisible;
-  }
-
-  selectCategory(categoryName: string) {
-    this.httpService.updateCategory(categoryName);
-    this.menuVisible = false;
   }
 }

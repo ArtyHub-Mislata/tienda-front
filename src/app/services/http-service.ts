@@ -56,10 +56,6 @@ export class HttpService {
     return this.httpClient.get<CategoryModel>(`${this.url}/categories/${id}`);
   }
 
-  getCategoryByName(name: string): Observable<CategoryModel> {
-    return this.httpClient.get<CategoryModel>(`${this.url}/categories/name/${name}`);
-  }
-
   updateCategory(categoryName: string) {
     this.categorySelected.next(categoryName);
   }

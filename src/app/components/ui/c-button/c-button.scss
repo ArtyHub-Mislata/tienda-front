@@ -14,7 +14,7 @@ a.boton {
 
     --boton-padding: var(--mlt-sys-padding-3);
     --boton-width: var(--mlt-sys-width-1);
-    --boton-border-radius:var(--mlt-sys-border-radius-2);
+    --boton-border-radius:var(--mlt-sys-border-radius-15);
 
     font-family: var(--boton-font-family);
     font-size: var(--boton-font-size);
@@ -84,19 +84,16 @@ button.boton--tamano-pequeno,
 a.boton--tamano-pequeno {
     --boton-font-size: var(--mlt-sys-font-size-3);
     --boton-padding: var(--mlt-sys-padding-2);
-    --boton-border-radius: var(--mlt-sys-border-radius-1);
 }
 
 button.boton--tamano-mediano,
 a.boton--tamano-mediano {
     --boton-font-size: var(--mlt-sys-font-size-4);
     --boton-padding: var(--mlt-sys-padding-3);
-    --boton-border-radius: var(--mlt-sys-border-radius-2);
 }
 
 button.boton--tamano-grande,
 a.boton--tamano-grande {
     --boton-font-size: var(--mlt-sys-font-size-5);
     --boton-padding: var(--mlt-sys-padding-4);
-    --boton-border-radius: var(--mlt-sys-border-radius-3);
 }
