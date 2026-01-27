@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { PageResponse } from '../../../models/PageResponseModel';
 import { ArtworkModel } from '../../../models/ArtworkModel';
 import { HttpService } from '../../../services/http-service';
@@ -14,7 +14,7 @@ import { CButton } from '../../ui/c-button/c-button';
   templateUrl: './artwork-list-page.html',
   styleUrl: './artwork-list-page.scss',
 })
-export class ArtworkListPage {
+export class ArtworkListPage implements AfterViewInit{
   artworkList?: PageResponse<ArtworkModel>
   filteredArtworks: ArtworkModel[] = [];
 
@@ -23,9 +23,25 @@ export class ArtworkListPage {
   isSidebarCollapsed = false;
 
   showAllArtworks = false;
+
+  @ViewChild('infoSection') infoSection!: ElementRef;
+  isInfoVisible = false;
   
   constructor(private httpService: HttpService){
 
+  }
+  ngAfterViewInit(): void {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          this.isInfoVisible = true;
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    observer.observe(this.infoSection.nativeElement);
   }
   
   ngOnInit(){

@@ -11,6 +11,37 @@
 
 <hr class="c-initial__hr">
 
+<section #infoSection class="c-info-section g--margin-top-9 g--padding-y-9" [class.is-visible]="isInfoVisible">
+    <div class="l-flex l-flex--gap-9 l-flex--align-start">
+        
+        <div class="c-info-card-1">
+            <h3 class="c-info-card__title fw-bold g--font-montserrat-arabic">NUESTRA FILOSOFÍA</h3>
+            <p class="c-info-card__text">
+                En ArtyHub, trascendemos la frontera tradicional entre artista y coleccionista. 
+                No solo vendemos piezas; curamos emociones que redefinen tu espacio vital.
+            </p>
+        </div>
+
+        <div class="c-info-card-2">
+            <h3 class="c-info-card__title fw-bold g--font-montserrat-arabic">EXCELENCIA SELECCIONADA</h3>
+            <p class="c-info-card__text">
+                Cada obra de arte en nuestra galería digital se somete a un riguroso proceso de selección. 
+                La autenticidad, el alma y la maestría técnica son nuestros únicos estándares.
+            </p>
+        </div>
+
+        <div class="c-info-card-3">
+            <h3 class="c-info-card__title fw-bold g--font-montserrat-arabic">ENTREGA GLOBAL</h3>
+            <p class="c-info-card__text">
+                Del lienzo a tu pared. Ofrecemos protección de grado museístico y envío internacional de lujo para cada obra maestra.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<hr class="c-initial__hr">
+
 <div class="main-container" [class.is-collapsed]="isSidebarCollapsed">
     <div class="c-sidebar">
         <button class="c-sidebar__toggle" (click)="toggleSidebar()">
