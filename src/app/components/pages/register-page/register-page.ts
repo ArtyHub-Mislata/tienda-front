@@ -3,10 +3,11 @@ import { HttpService } from '../../../services/http-service';
 import { UserModel } from '../../../models/UserModel';
 import { Router, RouterLink } from '@angular/router';
 import { CButton } from '../../../components/ui/c-button/c-button';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'register-page',
-  imports: [RouterLink, CButton],
+  imports: [RouterLink, CButton, FormsModule],
   templateUrl: './register-page.html',
   styleUrl: './register-page.scss',
 })

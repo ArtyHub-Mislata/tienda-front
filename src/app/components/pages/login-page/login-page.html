@@ -6,15 +6,46 @@
             
             <div class="c-auth__form-group">
                 <label class="c-auth__form-group-label">Email:</label>
-                <input type="email" class="c-auth__form-group-input" placeholder="ejemplo@gmail.com"
-                       [(ngModel)]="credential.email" name="email" required email #emailCtrl="ngModel">
+                <input 
+                    type="email" 
+                    class="c-auth__form-group-input" 
+                    placeholder="ejemplo@gmail.com"
+                    [(ngModel)]="credential.email" 
+                    name="email" 
+                    required 
+                    email 
+                    #emailCtrl="ngModel">
+
+                @if (emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)) {
+                    <div class="alert alert-warning">
+                        El formato del email que has introducido no es correcto. Introduce un formato valido
+                    </div>
+                }
             </div>
 
             <div class="c-auth__form-group">
                 <label class="c-auth__form-group-label">Contraseña:</label>
-                <input type="password" class="c-auth__form-group-input" placeholder="**********"
-                       [(ngModel)]="credential.password" name="password" required #passwordCtrl="ngModel">
+                <input 
+                    type="password" 
+                    class="c-auth__form-group-input" 
+                    placeholder="**********"
+                    [(ngModel)]="credential.password" 
+                    name="password" 
+                    required 
+                    #passwordCtrl="ngModel">
+
+                @if (passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)) {
+                    <div class="alert alert-warning">
+                        La contraseña debe tener al menos 8 caracteres
+                    </div>
+                }
             </div>
+
+            @if (generalError) {
+                <div class="alert alert-warning text-center">
+                    {{ generalError }}
+                </div>
+            }
 
             <a routerLink="/register" class="c-auth__card-link g--margin-top-3 text-center">He olvidado la contraseña</a>
 

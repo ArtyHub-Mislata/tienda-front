@@ -6,8 +6,22 @@
             
             <div class="c-auth__form-group">
                 <label class="c-auth__form-group-label">*Email:</label>
-                <input type="email" class="c-auth__form-group-input" placeholder="ejemplo@gmail.com">
+                <input 
+                type="email" 
+                class="c-auth__form-group-input" 
+                placeholder="ejemplo@gmail.com"
+                [(ngModel)]="user.email" 
+                name="email" 
+                required 
+                email 
+                #emailCtrl="ngModel">
             </div>
+
+            @if (emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)) {
+                <div class="alert alert-warning">
+                    El formato del email que has introducido no es correcto. Introduce un formato valido
+                </div>
+            }
 
             <div class="c-auth__form-group">
                 <label class="c-auth__form-group-label">*Contraseña:</label>
