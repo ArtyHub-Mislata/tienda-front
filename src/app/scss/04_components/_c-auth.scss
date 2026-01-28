@@ -64,6 +64,10 @@
         }
     }
 
+    &__alert {
+        border-radius: 30px;
+    }
+
     &__button--auth {
         border-radius: 50px !important;
         transition: transform 0.3s ease;
@@ -84,7 +88,7 @@
     }
 
     &__button--half {
-        width: 48%;
+        width: 40%;
         border-radius: 50px !important;
         transition: transform 0.3s ease;
         text-align: center;
