@@ -1,66 +1,100 @@
 <div class="c-auth l-flex l-flex--column l-flex--align-center l-flex--justify-center">
-    <h1 class="c-auth__title g--margin-bottom-7">ARTYHUB</h1>
+  <h1 class="c-auth__title g--margin-bottom-7">ARTYHUB</h1>
 
-    <div class="c-auth__card g--padding-8">
-        <form class="l-flex l-flex--column l-flex--gap-4">
-            
-            <div class="c-auth__form-group">
-                <label class="c-auth__form-group-label">*Email:</label>
-                <input 
-                    type="email" 
-                    class="c-auth__form-group-input" 
-                    placeholder="ejemplo@gmail.com"
-                    [(ngModel)]="user.email" 
-                    name="email" 
-                    required 
-                    email 
-                    #emailCtrl="ngModel">
-                    
-                @if (emailCtrl.invalid && emailCtrl.touched) {
-                    <div class="alert alert-danger g--margin-top-4 c-auth__alert g--margin-bottom-3">
-                        Formato de email inválido
-                    </div>
-                }
-            </div>
+  <div class="c-auth__card g--padding-8">
+    <form class="l-flex l-flex--column l-flex--gap-4" (ngSubmit)="onRegister()">
+      <div class="c-auth__form-group">
+        <label class="c-auth__form-group-label">*Email:</label>
+        <input
+          type="email"
+          name="email"
+          class="c-auth__form-group-input"
+          placeholder="ejemplo@gmail.com"
+          [(ngModel)]="user.email"
+          required
+        />
+      </div>
 
+      <div class="c-auth__form-group">
+        <label class="c-auth__form-group-label">*Contraseña:</label>
+        <input
+          type="password"
+          name="password"
+          class="c-auth__form-group-input"
+          placeholder="**********"
+          [(ngModel)]="user.password"
+          required
+        />
+      </div>
 
-            <div class="c-auth__form-group">
-                <label class="c-auth__form-group-label">*Contraseña:</label>
-                <input 
-                    type="password" 
-                    name="password" 
-                    class="c-auth__form-group-input" 
-                    placeholder="**********"
-                    required>
-            </div>
+      <div class="c-auth__form-group">
+        <label class="c-auth__form-group-label">*Nombre:</label>
+        <input
+          type="text"
+          name="name"
+          class="c-auth__form-group-input"
+          placeholder="Tu nombre"
+          [(ngModel)]="user.name"
+          required
+        />
+      </div>
+      <div class="c-auth__form-group">
+        <label class="c-auth__form-group-label">*Ciudad:</label>
+        <input
+          type="text"
+          name="address"
+          class="c-auth__form-group-input"
+          placeholder="Cuenca"
+          [(ngModel)]="user.address"
+          required
+        />
+      </div>
+      <div class="c-auth__form-group">
+        <label class="c-auth__form-group-label">*Link de la imagen de perfil:</label>
+        <input
+          type="text"
+          name="imageProfileUrl"
+          class="c-auth__form-group-input"
+          placeholder="url"
+          [(ngModel)]="user.imageProfileUrl"
+          required
+        />
+      </div>
 
-            <div class="c-auth__form-group">
-                <label class="c-auth__form-group-label">*Usuario:</label>
-                <input 
-                    type="text" 
-                    name="username" 
-                    class="c-auth__form-group-input" 
-                    placeholder="Usuario"
-                    required>
-            </div>
+      <div class="c-auth__form-group">
+        <label class="c-auth__form-group-label">Descripción:</label>
+        <textarea
+          name="description"
+          class="c-auth__form-group-input c-auth__form-group-input--textarea"
+          placeholder="Soy alguien que busca..."
+          [(ngModel)]="user.description"
+        >
+        </textarea>
+      </div>
 
-            <div class="c-auth__form-group">
-                <label class="c-auth__form-group-label">Descripción:</label>
-                <textarea 
-                    name="description" 
-                    class="c-auth__form-group-input c-auth__form-group-input--textarea" 
-                    placeholder="Soy alguien que busca...">
-                </textarea>
-            </div>
+      <div class="l-flex l-flex--justify-between g--margin-top-4">
+        <a
+          c-button
+          funcion="alternativa"
+          importancia="secundaria"
+          tamano="pequeno"
+          routerLink="/login"
+          class="c-auth__button--half"
+        >
+          Volver
+        </a>
 
-            <div class="l-flex l-flex--justify-between g--margin-top-4">
-                <a c-button funcion="alternativa" importancia="secundaria" routerLink="/login" class="c-auth__button--half">
-                    Volver
-                </a>
-                <button c-button funcion="normal" importancia="primaria" class="c-auth__button--half" (click)="onRegister()">
-                    Continuar
-                </button>
-            </div>
-        </form>
-    </div>
+        <button
+          c-button
+          funcion="normal"
+          importancia="primaria"
+          tamano="pequeno"
+          class="c-auth__button--half"
+          type="submit"
+        >
+          Continuar
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
