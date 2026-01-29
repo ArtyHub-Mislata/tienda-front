@@ -1,18 +1,19 @@
 @if (comprobarCierre) {
   <div class="c-logout l-flex l-flex--align-center g--padding-4">
     <i class="fas fa-info-circle g--margin-right-3"></i>
-    <h1>¿Estás seguro que deseas cerrar sesión?</h1>
-    <div class="l-flex l-flex--justify-center g--margin-top-4">
+    <h1 class="g--margin-right-8 g--margin-top-2">¿Estás seguro que deseas cerrar sesión?</h1>
+    <div class="l-flex l-flex--justify-center">
       <a
         c-button
         funcion="normal"
         importancia="primaria"
-        tamano="mediano"
+        tamano="pequeno"
+        class="c-logout__btn-cancelar"
         (click)="comprobarCierre = false"
         >Cancelar</a
       >
       &nbsp;&nbsp;&nbsp;
-      <a c-button funcion="peligrosa" importancia="terciaria" tamano="mediano" (click)="onLogout()"
+      <a c-button funcion="peligrosa" importancia="terciaria" tamano="pequeno" class="c-logout__btn-cerrar" (click)="onLogout()"
         >Cerrar Sesión</a
       >
     </div>
@@ -52,16 +53,16 @@
             <a class="nav-link" routerLink="profile"> {{ user.name }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" (click)="logOut()">Log Out</a>
+            <a class="nav-link c-header__log-out" (click)="logOut()">Log Out</a>
           </li>
         } @else {
           <li class="nav-item">
-            <a class="nav-link" routerLink="login">Log In</a>
+            <a class="nav-link c-header__log-in" routerLink="login">Log In</a>
           </li>
         }
         <li class="nav-item">
-          <a class="nav-link c-header__carrito-btn" routerLink="cart">
-            <img src="images/carrito.png" alt="" />
+          <a class="nav-link" routerLink="cart">
+            <i class="fa-solid fa-cart-shopping c-header__carrito-icon"></i>
           </a>
         </li>
       </ul>

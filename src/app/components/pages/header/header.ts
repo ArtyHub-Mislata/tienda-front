@@ -3,10 +3,11 @@ import { Router, RouterLink } from '@angular/router';
 import { UserModel } from '../../../models/UserModel';
 import { HttpService } from '../../../services/http-service';
 import { FormsModule } from '@angular/forms';
+import { CButton } from '../../ui/c-button/c-button';
 
 @Component({
   selector: 'c-header',
-  imports: [RouterLink, FormsModule],
+  imports: [RouterLink, FormsModule, CButton],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })

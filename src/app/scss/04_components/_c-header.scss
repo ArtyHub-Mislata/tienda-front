@@ -29,26 +29,34 @@
         }
     }
 
-    &__search-btn {
+    &__log-out {
         cursor: pointer;
-        transition: transform 0.2s;
-        width: 55px;
-        height: 55px;
+        transition: all 0.2s;
 
         &:hover {
-            transform: scale(1.1);
+            color: var(--mlt-sys-color-alternativo-6);
+            transform: scale(1.05);
         }
     }
 
-    &__carrito-btn {
+    &__log-in {
         cursor: pointer;
-        transition: transform 0.2s;
-        img {
-            width: 40px;
-            height: 40px;
-        }
+        transition: all 0.2s;
 
         &:hover {
+            color: var(--mlt-sys-color-alternativo-6);
+            transform: scale(1.05);
+        }
+    }
+
+    &__carrito-icon {
+        margin-top: 2px;
+        cursor: pointer;
+        font-size: 24px;
+        transition: all 0.2s;
+
+        &:hover {
+            color: var(--mlt-sys-color-alternativo-6);
             transform: scale(1.1);
         }
     }
@@ -67,6 +75,24 @@
 
     &.is-hiding {
         animation: slideOut 0.5s ease-in forwards;
+    }
+
+    &__btn-cancelar {
+        cursor: pointer;
+        transition: transform 0.2s;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+
+    &__btn-cerrar {
+        cursor: pointer;
+        transition: transform 0.2s;
+
+        &:hover {
+            transform: scale(1.05);
+        }
     }
 }
 
