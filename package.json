@@ -22,6 +22,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/cdk": "^21.1.1",
     "@angular/common": "^20.3.0",
     "@angular/compiler": "^20.3.0",
     "@angular/core": "^20.3.0",
@@ -31,6 +32,7 @@
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.8",
     "jquery": "^3.7.1",
+    "ngx-scrollreveal": "^3.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"

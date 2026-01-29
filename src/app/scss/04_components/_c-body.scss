@@ -1,0 +1,19 @@
+@use "../01_utilities" as *;
+
+.c-body {
+    --bg-light: var(--mlt-sys-color-principal-2);
+    --bg-dark: var(--mlt-sys-color-principal-1);
+    
+    background: radial-gradient(
+        circle at center, 
+        var(--bg-light) 0%, 
+        var(--bg-dark) 70%
+    );
+    background-attachment: fixed;
+    color: var(--mlt-sys-color-blanco-9);
+    font-family:var(--mlt-sys-font-default); 
+    min-height: var(--mlt-sys-height-min);
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}

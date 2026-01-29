@@ -1,0 +1,117 @@
+<div class="c-initial l-flex l-flex--align-center l-flex--justify-start">
+    <div class="c-initial__content g--padding-8">
+        <h1 class="c-initial__title fw-bold g--font-montserrat-arabic">
+            NO VENDAS HAMBURGUESAS<br>VENDE ARTE
+        </h1>
+        <p class="c-initial__subtitle">
+            ARTYHUB, TU GALERÍA
+        </p>
+    </div>
+</div>
+
+<hr class="c-initial__hr">
+
+<section #infoSection class="c-info-section g--margin-top-9 g--padding-y-9" [class.is-visible]="isInfoVisible">
+    <div class="l-flex l-flex--gap-9 l-flex--align-start">
+        
+        <div class="c-info-card-1">
+            <h3 class="c-info-card__title fw-bold g--font-montserrat-arabic">NUESTRA FILOSOFÍA</h3>
+            <p class="c-info-card__text">
+                En ArtyHub, trascendemos la frontera tradicional entre artista y coleccionista. 
+                No solo vendemos piezas; curamos emociones que redefinen tu espacio vital.
+            </p>
+        </div>
+
+        <div class="c-info-card-2">
+            <h3 class="c-info-card__title fw-bold g--font-montserrat-arabic">EXCELENCIA SELECCIONADA</h3>
+            <p class="c-info-card__text">
+                Cada obra de arte en nuestra galería digital se somete a un riguroso proceso de selección. 
+                La autenticidad, el alma y la maestría técnica son nuestros únicos estándares.
+            </p>
+        </div>
+
+        <div class="c-info-card-3">
+            <h3 class="c-info-card__title fw-bold g--font-montserrat-arabic">ENTREGA GLOBAL</h3>
+            <p class="c-info-card__text">
+                Del lienzo a tu pared. Ofrecemos protección de grado museístico y envío internacional de lujo para cada obra maestra.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<hr class="c-initial__hr">
+
+<div class="main-container" [class.is-collapsed]="isSidebarCollapsed">
+    <div class="c-sidebar">
+        <button class="c-sidebar__toggle" (click)="toggleSidebar()">
+            {{ isSidebarCollapsed ? '>' : '<' }}
+        </button>
+        @if (!isSidebarCollapsed) {
+            <nav class="c-sidebar__nav">
+                <h2 class="c-sidebar__title">Categorías</h2>
+                <ul class="c-sidebar__list">
+                    <li class="c-sidebar__list-item">
+                        <span (click)="selectedCategory('Todas')">Todas</span>
+                    </li>
+                    @for (category of categories; track category.id) {
+                        <li class="c-sidebar__list-item">
+                            <span (click)="selectedCategory(category.name)">{{ category.name }}</span>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        }
+    </div>
+    <div class="content">
+        <div class="l-flex l-flex--justify-center">
+            <div class="g--width-1400">
+
+                <div class="l-flex l-flex--justify-between g--margin-bottom-9">
+                    @for (artwork of filteredArtworks.slice(0, 2); track artwork.id) {
+                        <div class="c-artwork-card c-artwork-card--featured" routerLink="/artworks/{{ artwork.id }}">
+                            <div class="c-artwork-card--featured__image-container">
+                                <img [src]="artwork.image" [alt]="artwork.name" class="c-artwork-card__img">
+                                <div class="c-artwork-card__info l-flex l-flex--justify-between l-flex--align-center">
+                                    <span class="c-artwork-card--featured__name">{{ artwork.name }}</span>
+                                    <span class="c-artwork-card__price g--font-questrial">{{ artwork.price }}€</span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                @if (filteredArtworks.slice(2).length > 0) {
+                
+                    <h2 class="c-section-title fw-bold">
+                        Descubre nuevas obras:
+                    </h2>
+
+                    <div class="l-flex l-flex--wrap l-flex--justify-start l-flex--gap-9">
+                        
+                            @for (artwork of (showAllArtworks ? filteredArtworks.slice(2) : filteredArtworks.slice(2, 10)); track artwork.id) {
+                                <div class="c-artwork-card" routerLink="/artworks/{{ artwork.id }}">
+                                    <div class="c-artwork-card__image-container">
+                                        <img [src]="artwork.image" [alt]="artwork.name" class="c-artwork-card__img">
+                                        <div class="c-artwork-card__info l-flex l-flex--justify-between l-flex--align-center">
+                                            <span class="c-artwork-card__name">{{ artwork.name }}</span>
+                                            <span class="c-artwork-card__price g--font-questrial">{{ artwork.price }}€</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                    </div>
+
+                    @if (filteredArtworks.length > 10) {
+                        <div class="l-flex l-flex--justify-center g--margin-top-9 g--margin-bottom-9">
+                            <button c-button funcion="normal" importancia="primaria" tamano="grande" class="g--margin-top-9 c-button--show-all" (click)="toggleShowAllArtworks()">
+                                {{ showAllArtworks ? 'Ver menos' : 'Ver todo' }}
+                            </button>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<c-chatbot></c-chatbot>

@@ -1,0 +1,71 @@
+@if (comprobarCierre) {
+  <div class="c-logout l-flex l-flex--align-center g--padding-4">
+    <i class="fas fa-info-circle g--margin-right-3"></i>
+    <h1 class="g--margin-right-8 g--margin-top-2">¿Estás seguro que deseas cerrar sesión?</h1>
+    <div class="l-flex l-flex--justify-center">
+      <a
+        c-button
+        funcion="normal"
+        importancia="primaria"
+        tamano="pequeno"
+        class="c-logout__btn-cancelar"
+        (click)="comprobarCierre = false"
+        >Cancelar</a
+      >
+      &nbsp;&nbsp;&nbsp;
+      <a c-button funcion="peligrosa" importancia="terciaria" tamano="pequeno" class="c-logout__btn-cerrar" (click)="onLogout()"
+        >Cerrar Sesión</a
+      >
+    </div>
+  </div>
+}
+
+@if (showLogoutMessage) {
+  <div class="c-logout l-flex l-flex--align-center g--padding-4" [class.is-hiding]="isHiding">
+    <i class="fas fa-info-circle g--margin-right-3"></i>
+    Sesión cerrada correctamente. ¡Vuelve pronto!
+  </div>
+}
+
+<nav class="navbar navbar-expand-sm navbar-dark bg-color c-header">
+  <div class="container-fluid">
+    <div class="c-header__logo-icon">
+      <img src="images/logo.png" alt="Logo Artyhub" />
+    </div>
+    <a class="c-header__title navbar-brand fw-bold g--font-montserrat-arabic" href="#"> Artyhub </a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-center">
+        @if (isLogged) {
+          <li class="nav-item">
+            <a class="nav-link" routerLink="profile"> {{ user.name }}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link c-header__log-out" (click)="logOut()">Log Out</a>
+          </li>
+        } @else {
+          <li class="nav-item">
+            <a class="nav-link c-header__log-in" routerLink="login">Log In</a>
+          </li>
+        }
+        <li class="nav-item">
+          <a class="nav-link" routerLink="cart">
+            <i class="fa-solid fa-cart-shopping c-header__carrito-icon"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

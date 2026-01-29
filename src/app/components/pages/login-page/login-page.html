@@ -1,0 +1,65 @@
+<div class="c-auth l-flex l-flex--column l-flex--align-center l-flex--justify-center">
+    <h1 class="c-auth__title g--margin-bottom-7">ARTYHUB</h1>
+
+    <div class="c-auth__card g--padding-8">
+        <form (ngSubmit)="onLogin(loginForm)" #loginForm="ngForm" class="l-flex l-flex--column l-flex--gap-4">
+            
+            <div class="c-auth__form-group">
+                <label class="c-auth__form-group-label">Email:</label>
+                <input 
+                    type="email" 
+                    class="c-auth__form-group-input" 
+                    placeholder="ejemplo@gmail.com"
+                    [(ngModel)]="credential.email" 
+                    name="email" 
+                    required 
+                    email 
+                    #emailCtrl="ngModel">
+
+                @if (emailCtrl.invalid && emailCtrl.touched) {
+                    <div class="alert alert-danger g--margin-top-4 c-auth__alert g--margin-bottom-3">
+                        Formato de email inválido
+                    </div>
+                }
+            </div>
+
+            <div class="c-auth__form-group">
+                <label class="c-auth__form-group-label">Contraseña:</label>
+                <input 
+                    type="password" 
+                    class="c-auth__form-group-input" 
+                    placeholder="**********"
+                    [(ngModel)]="credential.password" 
+                    name="password" 
+                    required 
+                    #passwordCtrl="ngModel">
+
+                @if (passwordCtrl.invalid && passwordCtrl.touched) {
+                    <div class="alert alert-danger g--margin-top-4 c-auth__alert g--margin-bottom-3">
+                        La contraseña debe tener al menos 8 caracteres
+                    </div>
+                }
+            </div>
+
+            @if (generalError) {
+                <div class="alert alert-danger g--margin-top-4 c-auth__alert g--margin-bottom-3 text-center">
+                    {{ generalError }}
+                </div>
+            }
+
+            <a routerLink="/register" class="c-auth__card-link g--margin-top-3 text-center">He olvidado la contraseña</a>
+
+            <button c-button funcion="normal" importancia="primaria" class="c-auth__button--auth g--margin-top-3"
+                    [disabled]="loginForm.invalid">
+                Login
+            </button>
+
+            <div class="c-auth__card-divider">¿Eres nuevo?</div>
+
+            <a c-button funcion="alternativa" importancia="secundaria" class="c-auth__button--auth-alt"
+               routerLink="/register">
+                Crear cuenta
+            </a>
+        </form>
+    </div>
+</div>

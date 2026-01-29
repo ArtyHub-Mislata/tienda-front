@@ -1,0 +1,57 @@
+@if (user) {
+  <div class="l-flex l-flex--justify-center g--margin-top-9">
+    <div class="g--width-1200 l-flex l-flex--gap-6">
+      <aside class="c-profile-sidebar l-flex l-flex--column l-flex--align-center g--padding-6">
+        <div class="c-profile-sidebar__avatar g--margin-bottom-5">
+          <img [src]="user.imageProfileUrl" alt="Imagen de perfil" class="img-fluid" />
+        </div>
+
+        <div class="c-profile-sidebar__info l-flex l-flex--column l-flex--gap-4 g--width-100">
+          <div class="c-info-item">
+            <span class="c-info-item__label">Nombre usuario</span>
+            <p class="c-info-item__value">{{ user.name }}</p>
+          </div>
+          <div class="c-info-item">
+            <span class="c-info-item__label">Descripción</span>
+            <p class="c-info-item__value">{{ user.description }}</p>
+          </div>
+        </div>
+
+        <div class="l-flex l-flex--column g--width-100 l-flex--gap-3 g--margin-top-9">
+          <a
+            c-button
+            funcion="alternativa"
+            importancia="secundaria"
+            tamano="mediano"
+            routerLink="/"
+            class="c-button--pill"
+          >
+            Volver
+          </a>
+        </div>
+      </aside>
+
+      <main class="l-flex--1">
+        <div class="l-flex l-flex--wrap l-flex--gap-4">
+          @for (artwork of artworks; track artwork.id) {
+            <div
+              class="c-artwork-card c-artwork-card--small"
+              routerLink="/artworks/{{ artwork.id }}"
+            >
+              <div class="c-artwork-card__image-container">
+                <img [src]="artwork.image" class="c-artwork-card__img" alt="Artwork image" />
+              </div>
+              <div class="c-artwork-card__body g--padding-3">
+                <p class="c-artwork-card__title">{{ artwork.name }}</p>
+                <p class="c-artwork-card__artist">Artista</p>
+                <p class="c-artwork-card__price-tag g--font-questrial">{{ artwork.price }}€</p>
+              </div>
+            </div>
+          }
+        </div>
+      </main>
+    </div>
+  </div>
+}
+
+<c-chatbot></c-chatbot>

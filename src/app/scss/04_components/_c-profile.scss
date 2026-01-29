@@ -1,0 +1,63 @@
+@use "../01_utilities" as *;
+
+// SIDEBAR STYLES
+.c-profile-sidebar {
+    flex: 0 0 300px;
+    background-color: rgba(var(--mlt-sys-color-principal-2), 0.4);
+    border-radius: var(--mlt-sys-border-radius-15);
+    color: var(--mlt-sys-color-blanco-9);
+    height: fit-content;
+
+    &__avatar {
+        width: 120px;
+        height: 120px;
+        overflow: hidden;
+        border-radius: var(--mlt-sys-border-radius-4);
+        
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+}
+
+.c-info-item {
+    &__label {
+        display: block;
+        font-size: var(--mlt-sys-font-size-4);
+        color: var(--mlt-sys-color-blanco-6);
+        margin-bottom: var(--mlt-sys-margin-1);
+    }
+    &__value {
+        font-size: var(--mlt-sys-font-size-5);
+        font-weight: var(--mlt-sys-font-weight-medium);
+    }
+}
+
+// BOTONES ESTILO PILL (Cápsula)
+.c-button--pill {
+    border-radius: 50px !important;
+    text-align: center;
+    width: 100%;
+}
+
+.c-button--danger {
+    background-color: var(--mlt-sys-color-rojo-3) !important;
+}
+
+// AJUSTE DE TARJETAS PARA EL PERFIL (Más compactas)
+.c-artwork-card--small {
+    width: 200px !important;
+    background-color: var(--mlt-sys-color-principal-2);
+    
+    .c-artwork-card__image-container {
+        height: 150px;
+    }
+    
+    .c-artwork-card__price-tag {
+        color: var(--mlt-sys-color-azul-6);
+        font-size: var(--mlt-sys-font-size-5);
+        font-weight: var(--mlt-sys-font-weight-bold);
+    }
+}
