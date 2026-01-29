@@ -53,12 +53,10 @@
                 <ul class="c-sidebar__list">
                     <li class="c-sidebar__list-item">
                         <span (click)="selectedCategory('Todas')">Todas</span>
-                        <span (click)="selectedCategory('Todas')" class="g--padding-left-9">></span>
                     </li>
                     @for (category of categories; track category.id) {
                         <li class="c-sidebar__list-item">
                             <span (click)="selectedCategory(category.name)">{{ category.name }}</span>
-                            <span (click)="selectedCategory(category.name)" class="g--padding-left-9">></span>
                         </li>
                     }
                 </ul>
