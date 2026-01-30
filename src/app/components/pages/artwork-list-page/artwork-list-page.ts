@@ -20,6 +20,7 @@ export class ArtworkListPage implements AfterViewInit{
   searchText: string = '';
   selectedCategoryName: string = 'Todas';
 
+
   categories!: CategoryModel[];
 
   isSidebarCollapsed = false;
@@ -32,6 +33,7 @@ export class ArtworkListPage implements AfterViewInit{
 
 
   constructor(private httpService: HttpService){}
+
 
 
 
@@ -72,6 +74,8 @@ export class ArtworkListPage implements AfterViewInit{
       }
     })
   }
+
+
 
 
   toggleSidebar() {
