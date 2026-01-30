@@ -18,7 +18,7 @@ export class HttpService {
   categorySelected = new BehaviorSubject<string>('Todas');
   currentCategory$ = this.categorySelected.asObservable();
 
-  private url = 'http://localhost:8080/api';
+  private url = 'http://store-artyhub.producciondaw.cip.fpmislata.com/api';
 
   constructor(
     private httpClient: HttpClient,
