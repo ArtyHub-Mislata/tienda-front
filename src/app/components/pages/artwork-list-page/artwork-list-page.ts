@@ -7,16 +7,18 @@ import { RouterLink } from "@angular/router";
 import { Observable } from 'rxjs';
 import { CategoryModel } from '../../../models/CategoryModel';
 import { CButton } from '../../ui/c-button/c-button';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'artwork-list-page',
-  imports: [Chatbot, RouterLink, CButton ],
+  imports: [Chatbot, RouterLink, CButton, FormsModule  ],
   templateUrl: './artwork-list-page.html',
   styleUrl: './artwork-list-page.scss',
 })
 export class ArtworkListPage implements AfterViewInit{
-  artworkList?: PageResponse<ArtworkModel>
-  filteredArtworks: ArtworkModel[] = [];
+  artworkList?: PageResponse<ArtworkModel>;
+  searchText: string = '';
+  selectedCategoryName: string = 'Todas';
 
   categories!: CategoryModel[];
 
@@ -27,9 +29,13 @@ export class ArtworkListPage implements AfterViewInit{
   @ViewChild('infoSection') infoSection!: ElementRef;
   isInfoVisible = false;
   
-  constructor(private httpService: HttpService){
 
-  }
+
+  constructor(private httpService: HttpService){}
+
+
+
+
   ngAfterViewInit(): void {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -43,6 +49,9 @@ export class ArtworkListPage implements AfterViewInit{
 
     observer.observe(this.infoSection.nativeElement);
   }
+
+
+
   
   ngOnInit(){
     this.httpService.getAllArtworks().subscribe({
@@ -64,23 +73,6 @@ export class ArtworkListPage implements AfterViewInit{
     })
   }
 
-  selectedCategory(categoryName: string) {
-    this.httpService.updateCategory(categoryName);
-  }
-  
-  listenToCategoryChanges(){
-    this.httpService.currentCategory$.subscribe(categoryName => {
-      if (categoryName === 'Todas') {
-        this.filteredArtworks = this.artworkList?.data || [];
-      } else {
-        this.filterArtworksLocal(categoryName);
-      }
-    })
-  }
-  
-  filterArtworksLocal(categoryName: string){
-    this.filteredArtworks = this.artworkList?.data.filter(artwork => artwork.categoryDto?.name === categoryName) || [];
-  }
 
   toggleSidebar() {
     this.isSidebarCollapsed = !this.isSidebarCollapsed;
@@ -88,5 +80,41 @@ export class ArtworkListPage implements AfterViewInit{
 
   toggleShowAllArtworks() {
     this.showAllArtworks = !this.showAllArtworks;
+  }
+
+
+
+  selectedCategory(categoryName: string) {
+    this.httpService.updateCategory(categoryName);
+  }
+  
+  listenToCategoryChanges(){
+    this.httpService.currentCategory$.subscribe(categoryName => {
+      this.selectedCategoryName = categoryName;
+    })
+  }
+
+
+
+   get filteredArtworks(): ArtworkModel[] {
+    let results = this.artworkList?.data || [];
+
+    if (this.selectedCategoryName !== 'Todas') {
+      results = results.filter(a => a.categoryDto?.name === this.selectedCategoryName);
+    }
+
+    if (this.searchText) {
+      const text = this.searchText.toLowerCase();
+      results = results.filter(artwork =>
+        artwork.id?.toString().includes(text) ||
+        artwork.name?.toLowerCase().includes(text) ||
+        artwork.description.toLowerCase().includes(text) ||
+        artwork.price?.toString().includes(text) ||
+        artwork.categoryDto.name.toLowerCase().includes(text) ||
+        artwork.userDto.name.toLowerCase().includes(text)
+      );
+    }
+
+    return results;
   }
 }
