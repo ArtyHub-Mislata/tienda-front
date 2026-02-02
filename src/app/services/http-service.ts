@@ -10,6 +10,8 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { UserRegisterRequest } from '../models/UserRegisterRequest';
+import { CartModel } from '../models/CartModel';
+import { CartItemModel } from '../models/CartItemModel';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +20,7 @@ export class HttpService {
   categorySelected = new BehaviorSubject<string>('Todas');
   currentCategory$ = this.categorySelected.asObservable();
 
-  private url = 'http://store-back-artyhub.producciondaw.cip.fpmislata.com/api';
+  private url = 'http://localhost:8080/api';
 
   constructor(
     private httpClient: HttpClient,
@@ -106,7 +108,16 @@ export class HttpService {
   getUser(): Observable<UserModel | null> {
     return this.httpClient.get<UserModel | null>(`${this.url}/users/logged`);
   }
+
   getUserById(id: string): Observable<UserModel | null> {
     return this.httpClient.get<UserModel | null>(`${this.url}/users/${id}`);
+  }
+
+  //Carrito
+  getCartOfUser(): Observable<CartModel> {
+    return this.httpClient.get<CartModel>(`${this.url}/users/cart`);
+  }
+  AddItemToCart(cartItem: CartItemModel, id: string): Observable<CartModel> {
+    return this.httpClient.put<CartModel>(`${this.url}/carts/${id}`, cartItem);
   }
 }
