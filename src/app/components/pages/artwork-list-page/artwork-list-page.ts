@@ -19,6 +19,7 @@ export class ArtworkListPage implements AfterViewInit{
   artworkList?: PageResponse<ArtworkModel>;
   searchText: string = '';
   selectedCategoryName: string = 'Todas';
+  maxPrice: number = 1000000;
 
 
   categories!: CategoryModel[];
@@ -30,13 +31,7 @@ export class ArtworkListPage implements AfterViewInit{
   @ViewChild('infoSection') infoSection!: ElementRef;
   isInfoVisible = false;
   
-
-
   constructor(private httpService: HttpService){}
-
-
-
-
 
   ngAfterViewInit(): void {
     const observer = new IntersectionObserver(
@@ -98,6 +93,12 @@ export class ArtworkListPage implements AfterViewInit{
     })
   }
 
+  listenToMaxPriceChanges(){
+    this.httpService.currentMaxPrice$.subscribe(maxPrice => {
+      this.maxPrice = maxPrice;
+    })
+  }
+
 
 
    get filteredArtworks(): ArtworkModel[] {
@@ -105,6 +106,10 @@ export class ArtworkListPage implements AfterViewInit{
 
     if (this.selectedCategoryName !== 'Todas') {
       results = results.filter(a => a.categoryDto?.name === this.selectedCategoryName);
+    }
+
+    if (this.maxPrice) {
+      results = results.filter(a => a.price <= this.maxPrice);
     }
 
     if (this.searchText) {
