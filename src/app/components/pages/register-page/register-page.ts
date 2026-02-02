@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'register-page',
-  imports: [RouterLink, CButton, FormsModule],
+  imports: [CButton, FormsModule],
   templateUrl: './register-page.html',
   styleUrl: './register-page.scss',
 })

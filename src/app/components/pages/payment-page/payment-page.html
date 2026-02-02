@@ -1,0 +1,81 @@
+<div class="c-auth l-flex l-flex--column l-flex--align-center l-flex--justify-center">
+  <h1 class="c-auth__title g--margin-bottom-7 g--margin-top-9">ARTYHUB</h1>
+
+  <div class="c-auth__card g--padding-8">
+    <form class="l-flex l-flex--column l-flex--gap-4" >
+
+      <div class="c-auth__form-group">
+        <label class="c-auth__form-group-label">*Número de tarjeta:</label>
+        <input
+          type="text"
+          name="cardNumber"
+          class="c-auth__form-group-input"
+          placeholder="1234 5678 9012 3456"
+          [(ngModel)]="payment.cardNumber"
+          required
+        />
+      </div>
+
+      <div class="c-auth__form-group">
+        <label class="c-auth__form-group-label">*Fecha de expiración:</label>
+        <input
+          type="text"
+          name="expirationDate"
+          class="c-auth__form-group-input"
+          placeholder="MM/YY"
+          [(ngModel)]="payment.expirationDate"
+          required
+        />
+      </div>
+      
+      <div class="c-auth__form-group">
+        <label class="c-auth__form-group-label">*CVV:</label>
+        <input
+          type="text"
+          name="cvv"
+          class="c-auth__form-group-input"
+          placeholder="123"
+          [(ngModel)]="payment.cvv"
+          required
+        />
+      </div>
+
+      <div class="c-auth__form-group">
+        <label class="c-auth__form-group-label">*Nombre del titular:</label>
+        <input
+          type="text"
+          name="cardHolderName"
+          class="c-auth__form-group-input"
+          placeholder="Nombre del titular"
+          [(ngModel)]="payment.cardHolderName"
+          required
+        />
+      </div>
+
+      <div class="c-auth__form-group">
+        <label class="c-auth__form-group-label">Concepto:</label>
+        <input
+          type="text"
+          name="concept"
+          class="c-auth__form-group-input"
+          placeholder="Concepto"
+          [(ngModel)]="payment.concept"
+        />
+      </div>
+
+      <div class="l-flex g--margin-top-4 l-flex--justify-center">
+        <button
+          c-button
+          funcion="normal"
+          importancia="primaria"
+          tamano="pequeno"
+          class="c-auth__button--half"
+          type="submit"
+          (click)="onSubmit()"
+        >
+          Pagar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

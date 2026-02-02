@@ -6,6 +6,7 @@ import { ProfilePage } from './components/pages/profile-page/profile-page';
 import { loginGuardGuard } from './guards/login-guard-guard';
 import { RegisterPage } from './components/pages/register-page/register-page';
 import { UserPage } from './components/pages/user-page/user-page';
+import { PaymentPage } from './components/pages/payment-page/payment-page';
 
 export const routes: Routes = [
   { path: '', component: ArtworkListPage },
@@ -16,4 +17,6 @@ export const routes: Routes = [
   { path: 'register', component: RegisterPage },
   { path: 'profile', component: ProfilePage },
   { path: 'users/:id', component: UserPage },
+
+  { path: 'payment', component: PaymentPage }
 ];
