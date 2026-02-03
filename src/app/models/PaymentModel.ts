@@ -1,3 +1,5 @@
+import { Status } from "./StatusModel";
+
 export interface PaymentModel {
     id?: number;
     cardNumber: string;
@@ -5,4 +7,6 @@ export interface PaymentModel {
     cvv: string;
     cardHolderName: string;
     concept: string;
+    amount: number;
+    status: Status;
 }

@@ -1,3 +1,17 @@
+@if (showMessage) {
+  <div class="c-logout l-flex l-flex--align-center g--padding-4" [class.is-hiding]="isHiding">
+    <i class="fas fa-info-circle g--margin-right-3"></i>
+    Pago realizado correctamente.
+  </div>
+}
+
+@if (showErrorMessage) {
+  <div class="c-logout l-flex l-flex--align-center g--padding-4" [class.is-hiding]="isHiding">
+    <i class="fas fa-info-circle g--margin-right-3"></i>
+    Error al realizar el pago. Inténtalo de nuevo.
+  </div>
+}
+
 <div class="c-auth l-flex l-flex--column l-flex--align-center l-flex--justify-center">
   <h1 class="c-auth__title g--margin-bottom-7 g--margin-top-9">ARTYHUB</h1>
 
