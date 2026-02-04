@@ -7,10 +7,12 @@ import { loginGuardGuard } from './guards/login-guard-guard';
 import { RegisterPage } from './components/pages/register-page/register-page';
 import { UserPage } from './components/pages/user-page/user-page';
 import { PaymentPage } from './components/pages/payment-page/payment-page';
+import { InitialPage } from './components/pages/initial-page/initial-page';
 
 export const routes: Routes = [
-  { path: '', component: ArtworkListPage },
+  { path: '', component: InitialPage },
 
+  { path: 'artworks', component: ArtworkListPage },
   { path: 'artworks/:id', component: ArtworkPage },
 
   { path: 'login', component: LoginPage },

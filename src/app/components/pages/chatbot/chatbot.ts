@@ -21,10 +21,8 @@ export class Chatbot {
   onMessage(event: MessageEvent) {
     if (event.data && event.data.type === 'FILTRAR_ARTWORKS') {
       const categoria = event.data.categoria;
-      const precio = event.data.precio;
 
       this.httpService.updateCategory(categoria);
-      this.httpService.updateMaxPrice(precio);
 
       setTimeout(() => {
         const element = document.getElementById('content');

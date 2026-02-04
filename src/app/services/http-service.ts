@@ -19,9 +19,6 @@ export class HttpService {
   categorySelected = new BehaviorSubject<string>('Todas');
   currentCategory$ = this.categorySelected.asObservable();
 
-  maxPrice = new BehaviorSubject<number>(1000000);
-  currentMaxPrice$ = this.maxPrice.asObservable();
-
   private url = 'http://localhost:8080/api';
 
   constructor(
@@ -61,10 +58,7 @@ export class HttpService {
 
   updateCategory(categoryName: string) {
     this.categorySelected.next(categoryName);
-  }
-
-  updateMaxPrice(maxPrice: number) {
-    this.maxPrice.next(maxPrice);
+    this.getAllArtworks();
   }
 
   //CRUD LOGIN
