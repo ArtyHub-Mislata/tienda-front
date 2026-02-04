@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { HttpService } from '../../../services/http-service';
 
 @Component({
   selector: 'c-chatbot',
@@ -12,8 +13,24 @@ export class Chatbot {
   safeUrl: SafeResourceUrl;
   isOpen: boolean = false;
 
-  constructor(private sanitizer: DomSanitizer) {
+  constructor(private sanitizer: DomSanitizer, private httpService: HttpService) {
     this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.chatbotUrl);
+  }
+
+  @HostListener('window:message', ['$event'])
+  onMessage(event: MessageEvent) {
+    if (event.data && event.data.type === 'FILTRAR_ARTWORKS') {
+      const categoria = event.data.categoria;
+
+      this.httpService.updateCategory(categoria);
+
+      setTimeout(() => {
+        const element = document.getElementById('content');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
   }
 
   toggleChatbot() {

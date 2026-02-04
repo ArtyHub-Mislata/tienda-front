@@ -15,46 +15,19 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './artwork-list-page.html',
   styleUrl: './artwork-list-page.scss',
 })
-export class ArtworkListPage implements AfterViewInit{
+export class ArtworkListPage {
   artworkList?: PageResponse<ArtworkModel>;
   searchText: string = '';
   selectedCategoryName: string = 'Todas';
-
 
   categories!: CategoryModel[];
 
   isSidebarCollapsed = false;
 
   showAllArtworks = false;
-
-  @ViewChild('infoSection') infoSection!: ElementRef;
-  isInfoVisible = false;
   
-
-
   constructor(private httpService: HttpService){}
 
-
-
-
-
-  ngAfterViewInit(): void {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          this.isInfoVisible = true;
-          observer.unobserve(entry.target);
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    observer.observe(this.infoSection.nativeElement);
-  }
-
-
-
-  
   ngOnInit(){
     this.httpService.getAllArtworks().subscribe({
       next: (artworks) => {
@@ -100,10 +73,12 @@ export class ArtworkListPage implements AfterViewInit{
 
 
 
+
+
    get filteredArtworks(): ArtworkModel[] {
     let results = this.artworkList?.data || [];
 
-    if (this.selectedCategoryName !== 'Todas') {
+    if (this.selectedCategoryName && this.selectedCategoryName !== 'Todas') {
       results = results.filter(a => a.categoryDto?.name === this.selectedCategoryName);
     }
 

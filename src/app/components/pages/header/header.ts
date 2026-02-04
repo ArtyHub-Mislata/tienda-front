@@ -23,6 +23,7 @@ export class Header {
     private router: Router,
     private cd: ChangeDetectorRef,
   ) {}
+  
   ngOnInit() {
     this.httpService.isLogged().subscribe();
     this.httpService.isLogged$.subscribe({
