@@ -15,7 +15,6 @@ import { CartModel } from '../models/CartModel';
 import { CartItemModel } from '../models/CartItemModel';
 
 import { PaymentModel } from '../models/PaymentModel';
-p;
 
 @Injectable({
   providedIn: 'root',

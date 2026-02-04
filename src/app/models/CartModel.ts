@@ -1,6 +1,8 @@
 import { CartItemModel } from './CartItemModel';
+import { UserModel } from './UserModel';
 
 export interface CartModel {
   id: number;
-  items: CartItemModel[];
+  cartItems: CartItemModel[];
+  userDto: UserModel;
 }
