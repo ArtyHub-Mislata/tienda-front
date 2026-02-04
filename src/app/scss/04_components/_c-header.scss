@@ -31,7 +31,8 @@
 
     &__artworks {
         transition: all 0.2s;
-        margin-left: 1%;
+        margin-left: 10px;
+        color: var(--mlt-sys-color-blanco-2);
 
         &:hover {
             color: var(--mlt-sys-color-alternativo-6);
