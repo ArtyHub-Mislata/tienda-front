@@ -125,6 +125,13 @@ export class HttpService {
   }
   //CRUD PAGO
   pay(payment: PaymentModel): Observable<PaymentModel> {
-    return this.httpClient.post<PaymentModel>(`${this.url}/payments`, payment);
+    return this.httpClient.post<PaymentModel>(`${this.url}/payments/pay`, payment);
+  }
+
+  updateCart(cart: CartModel): Observable<CartModel> {
+    return this.httpClient.put<CartModel>(`${this.url}/cart/${cart.id}`, cart);
+  }
+  clearCart(id: string): Observable<void> {
+    return this.httpClient.delete<void>(`${this.url}/cart/${id}`);
   }
 }

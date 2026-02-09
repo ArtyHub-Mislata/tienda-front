@@ -1,12 +1,10 @@
-import { Status } from "./StatusModel";
+import { CardModel } from './CardModel';
+import { Status } from './StatusModel';
 
 export interface PaymentModel {
-    id?: number;
-    cardNumber: string;
-    expirationDate: string;
-    cvv: string;
-    cardHolderName: string;
-    concept: string;
-    amount: number;
-    status: Status;
+  id?: number;
+  cardDto: CardModel;
+  concept: string;
+  amount: number;
+  status: Status;
 }
