@@ -15,6 +15,7 @@ import { CartModel } from '../models/CartModel';
 import { CartItemModel } from '../models/CartItemModel';
 
 import { PaymentModel } from '../models/PaymentModel';
+import { OrderModel } from '../models/OrderModel';
 
 @Injectable({
   providedIn: 'root',
@@ -134,5 +135,12 @@ export class HttpService {
   }
   addToCart(id: string) {
     return this.httpClient.post<CartItemModel>(`${this.url}/cart/item/${id}`, {});
+  }
+
+  getOrdersOfUsers(): Observable<OrderModel[]> {
+    return this.httpClient.get<OrderModel[]>(`${this.url}/orders`);
+  }
+  addOrder(order: OrderModel): Observable<OrderModel> {
+    return this.httpClient.post<OrderModel>(`${this.url}/orders`, order);
   }
 }
