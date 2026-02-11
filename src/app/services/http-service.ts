@@ -120,10 +120,10 @@ export class HttpService {
   getCartOfUser(): Observable<CartModel> {
     return this.httpClient.get<CartModel>(`${this.url}/users/cart`);
   }
-  
+
   //CRUD PAGO
-  pay(payment: PaymentModel): Observable<PaymentModel> {
-    return this.httpClient.post<PaymentModel>(`${this.url}/payments/pay`, payment);
+  pay(payment: PaymentModel): Observable<boolean> {
+    return this.httpClient.post<boolean>(`${this.url}/payments/pay`, payment);
   }
 
   updateCart(cart: CartModel): Observable<CartModel> {
@@ -132,7 +132,7 @@ export class HttpService {
   clearCart(id: string): Observable<void> {
     return this.httpClient.delete<void>(`${this.url}/cart/${id}`);
   }
-  addToCart(id: string){
+  addToCart(id: string) {
     return this.httpClient.post<CartItemModel>(`${this.url}/cart/item/${id}`, {});
   }
 }

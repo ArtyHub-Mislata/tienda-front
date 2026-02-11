@@ -21,7 +21,7 @@ export class PaymentPage {
       cvv: '',
       holderName: '',
     },
-    concept: '',
+    concept: 'Pago en ArtyHub',
     amount: 0,
     status: Status.PENDING,
   };
@@ -54,31 +54,40 @@ export class PaymentPage {
   }
   realizarPago() {
     this.http.pay(this.payment).subscribe({
-      next: () => {
-        this.vaciarCarro();
-        this.showMessage = true;
-        this.isHiding = false;
-        setTimeout(() => {
-          this.isHiding = true;
-          setTimeout(() => {
-            this.showMessage = false;
-            this.isHiding = false;
-          }, 500);
-        }, 3000);
-        this.router.navigate(['/']);
+      next: (pagoCoorecto) => {
+        if (pagoCoorecto) {
+          this.vaciarCarro();
+          this.mostrarMensajePagoCorrecto();
+        } else {
+          this.mostrarMensajeError();
+        }
       },
       error: (error) => {
-        this.showErrorMessage = true;
-        this.isHiding = false;
-        setTimeout(() => {
-          this.isHiding = true;
-          setTimeout(() => {
-            this.showErrorMessage = false;
-            this.isHiding = false;
-          }, 500);
-        }, 3000);
+        console.log(error);
       },
     });
+  }
+  mostrarMensajeError() {
+    this.showErrorMessage = true;
+    this.isHiding = false;
+    setTimeout(() => {
+      this.isHiding = true;
+      setTimeout(() => {
+        this.showErrorMessage = false;
+        this.isHiding = false;
+      }, 500);
+    }, 3000);
+  }
+  mostrarMensajePagoCorrecto() {
+    this.showMessage = true;
+    this.isHiding = false;
+    setTimeout(() => {
+      this.isHiding = true;
+      setTimeout(() => {
+        this.showMessage = false;
+        this.isHiding = false;
+      }, 500);
+    }, 3000);
   }
   vaciarCarro() {
     const id = this.cart.id.toString();
