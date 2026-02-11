@@ -13,6 +13,7 @@
           </p>
           <p class="c-card-detail__category">{{ artwork.categoryDto.name }}</p>
           <p class="c-card-detail__description">{{ artwork.description }}</p>
+          <p class="c-card-detail__description">Stock : {{ artwork.stock }}</p>
         </div>
       </div>
 
@@ -26,6 +27,7 @@
             importancia="primaria"
             tamano="mediano"
             class="g--border-radius-20 g--padding-left-6 g--padding-right-6"
+            (click)="addToCart()"
           >
             Añadir al carrito
           </button>

@@ -10,6 +10,10 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { UserRegisterRequest } from '../models/UserRegisterRequest';
+
+import { CartModel } from '../models/CartModel';
+import { CartItemModel } from '../models/CartItemModel';
+
 import { PaymentModel } from '../models/PaymentModel';
 
 @Injectable({
@@ -108,12 +112,27 @@ export class HttpService {
   getUser(): Observable<UserModel | null> {
     return this.httpClient.get<UserModel | null>(`${this.url}/users/logged`);
   }
+
   getUserById(id: string): Observable<UserModel | null> {
     return this.httpClient.get<UserModel | null>(`${this.url}/users/${id}`);
   }
 
+  getCartOfUser(): Observable<CartModel> {
+    return this.httpClient.get<CartModel>(`${this.url}/users/cart`);
+  }
+
   //CRUD PAGO
-  pay(payment: PaymentModel): Observable<PaymentModel> {
-    return this.httpClient.post<PaymentModel>(`${this.url}/payments`, payment);
+  pay(payment: PaymentModel): Observable<boolean> {
+    return this.httpClient.post<boolean>(`${this.url}/payments/pay`, payment);
+  }
+
+  updateCart(cart: CartModel): Observable<CartModel> {
+    return this.httpClient.put<CartModel>(`${this.url}/cart/${cart.id}`, cart);
+  }
+  clearCart(id: string): Observable<void> {
+    return this.httpClient.delete<void>(`${this.url}/cart/${id}`);
+  }
+  addToCart(id: string) {
+    return this.httpClient.post<CartItemModel>(`${this.url}/cart/item/${id}`, {});
   }
 }
