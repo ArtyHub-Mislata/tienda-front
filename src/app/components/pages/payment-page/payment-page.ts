@@ -101,9 +101,6 @@ export class PaymentPage {
       },
     });
   }
-  addOrder() {
-    order: OrderModel;
-  }
 
   onSubmit() {
     this.realizarPago();
