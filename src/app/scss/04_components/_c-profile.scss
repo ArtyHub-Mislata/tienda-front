@@ -1,63 +1,143 @@
 @use "../01_utilities" as *;
 
-// SIDEBAR STYLES
+.profile-gallery-wrapper {
+    min-height: 100vh;
+    padding-top: 120px;
+    padding-bottom: 4rem;
+    background-color: #0e0e0e;
+    color: var(--mlt-sys-color-blanco-8);
+    font-family: var(--mlt-sys-font-montserrat-arabic);
+}
+
 .c-profile-sidebar {
-    flex: 0 0 300px;
-    background-color: rgba(var(--mlt-sys-color-principal-2), 0.4);
-    border-radius: var(--mlt-sys-border-radius-15);
-    color: var(--mlt-sys-color-blanco-9);
+    flex: 0 0 350px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
     height: fit-content;
+    position: sticky;
+    top: 120px;
 
     &__avatar {
-        width: 120px;
-        height: 120px;
+        width: 180px;
+        height: 180px;
         overflow: hidden;
-        border-radius: var(--mlt-sys-border-radius-4);
+        border: 1px solid var(--mlt-sys-color-amarillo-7);
+        padding: 5px;
+        background: transparent;
         
         img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            filter: grayscale(40%);
+            transition: filter 0.5s ease;
+            &:hover { filter: grayscale(0%); }
         }
     }
 }
 
 .c-info-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 1rem;
+
     &__label {
         display: block;
-        font-size: var(--mlt-sys-font-size-4);
-        color: var(--mlt-sys-color-blanco-6);
-        margin-bottom: var(--mlt-sys-margin-1);
+        font-size: 0.65rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #666;
+        margin-bottom: 0.5rem;
     }
     &__value {
-        font-size: var(--mlt-sys-font-size-5);
-        font-weight: var(--mlt-sys-font-weight-medium);
+        font-size: 0.95rem;
+        font-weight: 300;
+        color: var(--mlt-sys-color-blanco-8);
+        line-height: 1.4;
     }
 }
 
-// BOTONES ESTILO PILL (Cápsula)
-.c-button--pill {
-    border-radius: 50px !important;
-    text-align: center;
-    width: 100%;
+.gallery-main-title {
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--mlt-sys-color-amarillo-7);
+    display: inline-block;
 }
 
-.c-button--danger {
-    background-color: var(--mlt-sys-color-rojo-3) !important;
-}
-
-// AJUSTE DE TARJETAS PARA EL PERFIL (Más compactas)
 .c-artwork-card--small {
-    width: 200px !important;
-    background-color: var(--mlt-sys-color-principal-2);
+    width: 260px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.4s ease;
+    cursor: pointer;
+
+    &:hover {
+        border-color: var(--mlt-sys-color-amarillo-7);
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.02);
+    }
     
     .c-artwork-card__image-container {
-        height: 150px;
+        height: 200px;
+        overflow: hidden;
+        
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+    }
+
+    &:hover .c-artwork-card__image-container img {
+        transform: scale(1.1);
+    }
+    
+    .c-artwork-card__body {
+        text-align: left;
+    }
+
+    .c-artwork-card__title {
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 0.3rem;
+    }
+
+    .c-artwork-card__artist {
+        font-size: 0.7rem;
+        color: #666;
+        text-transform: uppercase;
+        letter-spacing: 1px;
     }
     
     .c-artwork-card__price-tag {
-        color: var(--mlt-sys-color-azul-6);
-        font-size: var(--mlt-sys-font-size-5);
-        font-weight: var(--mlt-sys-font-weight-bold);
+        color: var(--mlt-sys-color-amarillo-7);
+        font-size: 1rem;
+        margin-top: 1rem;
+        border-top: 1px solid rgba(255,255,255,0.05);
+        padding-top: 0.5rem;
+    }
+}
+
+.btn-logout-profile {
+    background: transparent;
+    border: 1px solid #444;
+    color: #888;
+    padding: 0.8rem;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    cursor: pointer;
+
+    &:hover {
+        border-color: #ff4d4d;
+        color: #ff4d4d;
+        background: rgba(255, 77, 77, 0.05);
     }
 }

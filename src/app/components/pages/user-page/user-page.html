@@ -1,55 +1,51 @@
 @if (user) {
-  <div class="l-flex l-flex--justify-center g--margin-top-9">
-    <div class="g--width-1200 l-flex l-flex--gap-6">
-      <aside class="c-profile-sidebar l-flex l-flex--column l-flex--align-center g--padding-6">
-        <div class="c-profile-sidebar__avatar g--margin-bottom-5">
-          <img [src]="user.imageProfileUrl" alt="Imagen de perfil" class="img-fluid" />
-        </div>
-
-        <div class="c-profile-sidebar__info l-flex l-flex--column l-flex--gap-4 g--width-100">
-          <div class="c-info-item">
-            <span class="c-info-item__label">Nombre usuario</span>
-            <p class="c-info-item__value">{{ user.name }}</p>
+  <div class="c-user-profile">
+    <div class="c-user-profile__container l-flex l-flex--justify-center g--padding-bottom-9">
+      <div class="g--width-1200 l-flex l-flex--gap-9 l-flex--wrap">
+        
+        <aside class="c-profile-sidebar l-flex l-flex--column l-flex--align-center g--padding-8">
+          <div class="c-profile-sidebar__avatar-container g--margin-bottom-6">
+            <img [src]="user.imageProfileUrl" alt="Retrato del artista" class="c-profile-sidebar__avatar" />
           </div>
-          <div class="c-info-item">
-            <span class="c-info-item__label">Descripción</span>
-            <p class="c-info-item__value">{{ user.description }}</p>
+
+          <div class="c-profile-sidebar__info g--width-100">
+            <h2 class="c-profile-sidebar__name g--margin-bottom-4">{{ user.name }}</h2>
+            <div style="width: 30px; height: 1px; background: var(--mlt-sys-color-amarillo-7); margin: 1.5rem auto;"></div>
+            <p class="c-profile-sidebar__description">{{ user.description }}</p>
           </div>
-        </div>
 
-        <div class="l-flex l-flex--column g--width-100 l-flex--gap-3 g--margin-top-9">
-          <a
-            c-button
-            funcion="alternativa"
-            importancia="secundaria"
-            tamano="mediano"
-            routerLink="/"
-            class="c-button--pill"
-          >
-            Volver
-          </a>
-        </div>
-      </aside>
+          <div class="g--margin-top-8 g--width-100">
+            <a routerLink="/" class="btn-back-gallery">
+              <i class="fa-thin fa-long-arrow-left"></i> Volver a la Galería
+            </a>
+          </div>
+        </aside>
 
-      <main class="l-flex--1">
-        <div class="l-flex l-flex--wrap l-flex--gap-4">
-          @for (artwork of artworks; track artwork.id) {
-            <div
-              class="c-artwork-card c-artwork-card--small"
-              routerLink="/artworks/{{ artwork.id }}"
-            >
-              <div class="c-artwork-card__image-container">
-                <img [src]="artwork.image" class="c-artwork-card__img" alt="Artwork image" />
+        <main class="c-user-profile__content l-flex--1">
+          <h3 class="c-user-profile__section-title">Obras Disponibles</h3>
+          
+          <div class="c-artwork-grid">
+            @for (artwork of artworks; track artwork.id) {
+              <a [routerLink]="['/artworks', artwork.id]" class="g--text-decoration-none">
+                <div class="c-artwork-card">
+                  <div class="c-artwork-card__image-container">
+                    <img [src]="artwork.image" class="c-artwork-card__img" [alt]="artwork.name" />
+                  </div>
+                  <div class="c-artwork-card__body g--padding-5">
+                    <h4 class="c-artwork-card__title">{{ artwork.name }}</h4>
+                    <p class="c-artwork-card__price g--font-questrial">{{ artwork.price | currency:'EUR' }}</p>
+                  </div>
+                </div>
+              </a>
+            } @empty {
+              <div class="l-flex l-flex--column l-flex--align-center g--padding-9" style="grid-column: 1 / -1; opacity: 0.3;">
+                <i class="fa-thin fa- connotations fa-3x g--margin-bottom-4"></i>
+                <p class="g--letter-spacing-2">No hay obras expuestas en este momento</p>
               </div>
-              <div class="c-artwork-card__body g--padding-3">
-                <p class="c-artwork-card__title">{{ artwork.name }}</p>
-                <p class="c-artwork-card__artist">Artista</p>
-                <p class="c-artwork-card__price-tag g--font-questrial">{{ artwork.price }}€</p>
-              </div>
-            </div>
-          }
-        </div>
-      </main>
+            }
+          </div>
+        </main>
+      </div>
     </div>
   </div>
 }

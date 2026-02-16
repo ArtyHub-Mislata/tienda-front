@@ -1,19 +1,19 @@
 @use "../01_utilities" as *;
 
-.auth-gallery-wrapper {
+.register-gallery-wrapper {
     position: relative;
     min-height: 100vh;
     background-color: #0e0e0e;
     color: var(--mlt-sys-color-blanco-8);
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; 
     overflow: hidden;
 
     background-image: url('../../../../public/images/foto_inicio.png');
     background-size: cover;
-    background-position: center;
-    
+    background-position: center; 
+
     &::before {
         content: '';
         position: absolute;
@@ -26,19 +26,20 @@
     }
 }
 
-.auth-container {
+.register-container {
     position: relative;
-    margin-top: 5rem;
     z-index: 2;
     width: 100%;
-    max-width: 450px;
+    max-width: 500px; 
     padding: 2rem;
+    margin: auto; 
+    margin-top: 5rem;
     
     opacity: 0;
     animation: fadeIn 1.2s ease-out forwards;
 }
 
-.auth-card {
+.register-card {
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.08);
     padding: 3rem 2.5rem;
@@ -51,12 +52,12 @@
     }
 }
 
-.auth-header {
-    margin-bottom: 3rem;
+.register-header {
+    margin-bottom: 2.5rem;
 
     &__title {
         font-family: var(--mlt-sys-font-montserrat-arabic);
-        font-size: 2rem;
+        font-size: 1.8rem;
         font-weight: 300;
         letter-spacing: 6px;
         text-transform: uppercase;
@@ -72,20 +73,20 @@
     }
 }
 
-.gallery-input-group {
-    margin-bottom: 2rem;
+.register-input-group {
+    margin-bottom: 1.8rem;
     text-align: left;
 
     label {
         display: block;
-        font-size: 0.75rem;
+        font-size: 0.7rem;
         letter-spacing: 2px;
         text-transform: uppercase;
         color: var(--mlt-sys-color-blanco-8);
-        margin-bottom: 0.8rem;
+        margin-bottom: 0.5rem;
     }
 
-    input {
+    input, textarea {
         width: 100%;
         background: transparent;
         border: none;
@@ -93,12 +94,13 @@
         padding: 10px 0;
         color: var(--mlt-sys-color-blanco-8);
         font-family: inherit;
-        font-size: 1rem;
+        font-size: 0.95rem;
         transition: all 0.3s ease;
         border-radius: 0;
 
         &::placeholder {
             color: rgba(255, 255, 255, 0.15);
+            font-size: 0.9rem;
         }
 
         &:focus {
@@ -107,22 +109,35 @@
             padding-left: 10px;
         }
     }
+
+    textarea {
+        resize: none;
+        height: 80px;
+        line-height: 1.5;
+        border: 1px solid rgba(255, 255, 255, 0.1); 
+        padding: 10px;
+        margin-top: 5px;
+        
+        &:focus {
+            border-color: var(--mlt-sys-color-amarillo-7);
+            padding-left: 15px;
+        }
+    }
 }
 
-.gallery-alert {
-    font-size: 0.8rem;
+.register-alert {
+    font-size: 0.75rem;
     color: #ff6b6b;
-    margin-top: 0.5rem;
+    margin-top: 0.4rem;
     letter-spacing: 1px;
     font-weight: 300;
 }
 
-.btn-gallery-auth {
+.btn-register-auth {
     display: inline-block;
     width: 100%;
     padding: 1rem;
     margin-top: 1rem;
-    margin-bottom: 1rem;
     background: transparent;
     border: 1px solid var(--mlt-sys-color-blanco-8);
     color: var(--mlt-sys-color-blanco-8);
@@ -140,26 +155,8 @@
     &:disabled {
         opacity: 0.5;
         cursor: not-allowed;
-        border-color: #555;
-    }
-
-    &--secondary {
-        border: none;
-        border-bottom: 1px solid transparent;
-        margin-top: 1.5rem;
-        font-size: 0.75rem;
-        color: #aaa;
-        width: auto;
-        padding: 0.5rem;
-
-        &:hover {
-            background: transparent;
-            color: var(--mlt-sys-color-amarillo-7);
-            border-bottom-color: var(--mlt-sys-color-amarillo-7);
-        }
     }
 }
-
 
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }

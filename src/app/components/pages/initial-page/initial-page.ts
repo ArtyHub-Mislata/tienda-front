@@ -1,10 +1,10 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { CButton } from '../../ui/c-button/c-button';
 import { RouterLink } from '@angular/router';
+import { Chatbot } from "../chatbot/chatbot";
 
 @Component({
   selector: 'initial-page',
-  imports: [CButton, RouterLink],
+  imports: [RouterLink, Chatbot],
   templateUrl: './initial-page.html',
   styleUrl: './initial-page.scss',
 })

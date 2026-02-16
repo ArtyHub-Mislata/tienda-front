@@ -19,8 +19,9 @@
   --chatbot-box-shadow: var(--mlt-sys-shadow-lg);
 
 
-  position: sticky;
+  position: fixed;
   bottom: 10px;
+  right: 20px;
   z-index: 100;
   pointer-events: none;
 }
@@ -42,6 +43,13 @@
     object-fit: contain;
     margin: auto;
     z-index: 101;
+  }
+
+  &__span {
+    margin: auto;
+    z-index: 101;
+    color: var(--chatbot-color-weak);
+    font-size: var(--mlt-sys-font-size-6);
   }
 }
 

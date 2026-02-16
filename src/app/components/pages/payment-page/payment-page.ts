@@ -1,19 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PaymentModel } from '../../../models/PaymentModel';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { HttpService } from '../../../services/http-service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Status } from '../../../models/StatusModel';
 import { CartModel } from '../../../models/CartModel';
 import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'payment-page',
-  imports: [FormsModule, CurrencyPipe],
+  standalone: true,
+  imports: [FormsModule, CurrencyPipe, RouterLink],
   templateUrl: './payment-page.html',
   styleUrl: './payment-page.scss',
 })
-export class PaymentPage {
+export class PaymentPage implements OnInit {
   payment: PaymentModel = {
     cardDto: {
       nTarget: '',
@@ -21,7 +22,7 @@ export class PaymentPage {
       cvv: '',
       holderName: '',
     },
-    concept: 'Pago en ArtyHub',
+    concept: 'Adquisición en ArtyHub',
     amount: 0,
     status: Status.PENDING,
   };
@@ -29,15 +30,18 @@ export class PaymentPage {
   isHiding: boolean = false;
   showMessage: boolean = false;
   showErrorMessage: boolean = false;
+  loading: boolean = false;
   cart!: CartModel;
 
   constructor(
     private http: HttpService,
     private router: Router,
   ) {}
+
   ngOnInit() {
     this.loadCart();
   }
+
   loadCart() {
     this.http.getCartOfUser().subscribe({
       next: (cart) => {
@@ -48,14 +52,26 @@ export class PaymentPage {
         );
       },
       error: (err) => {
-        console.log(err);
+        console.error('Error cargando carrito', err);
       },
     });
   }
+
+  onSubmit(form: NgForm) {
+    if (form.invalid) {
+        form.control.markAllAsTouched();
+        return;
+    }
+    this.realizarPago();
+  }
+
   realizarPago() {
+    this.loading = true;
+
     this.http.pay(this.payment).subscribe({
-      next: (pagoCoorecto) => {
-        if (pagoCoorecto) {
+      next: (pagoCorrecto) => {
+        this.loading = false;
+        if (pagoCorrecto) {
           this.vaciarCarro();
           this.mostrarMensajePagoCorrecto();
         } else {
@@ -63,24 +79,30 @@ export class PaymentPage {
         }
       },
       error: (error) => {
-        console.log(error);
+        this.loading = false;
+        console.error(error);
+        this.mostrarMensajeError();
       },
     });
   }
+
   mostrarMensajeError() {
     this.showErrorMessage = true;
     this.isHiding = false;
+    
     setTimeout(() => {
       this.isHiding = true;
       setTimeout(() => {
         this.showErrorMessage = false;
         this.isHiding = false;
       }, 500);
-    }, 3000);
+    }, 4000);
   }
+
   mostrarMensajePagoCorrecto() {
     this.showMessage = true;
     this.isHiding = false;
+    
     setTimeout(() => {
       this.isHiding = true;
       setTimeout(() => {
@@ -89,20 +111,19 @@ export class PaymentPage {
       }, 500);
     }, 3000);
   }
+
   vaciarCarro() {
     const id = this.cart.id.toString();
     this.http.clearCart(id).subscribe({
       next: () => {
-        console.log('SE HA VACIADO EL CARRITO');
-        this.router.navigate(['/']);
+        console.log('CARRITO VACIADO - ADQUISICIÓN COMPLETADA');
+        setTimeout(() => {
+            this.router.navigate(['/']);
+        }, 1500);
       },
       error: (err) => {
-        console.log(err);
+        console.error(err);
       },
     });
-  }
-
-  onSubmit() {
-    this.realizarPago();
   }
 }

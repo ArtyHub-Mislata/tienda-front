@@ -1,19 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserModel } from '../../../models/UserModel';
 import { ArtworkModel } from '../../../models/ArtworkModel';
 import { HttpService } from '../../../services/http-service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Chatbot } from '../chatbot/chatbot';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-user-page',
-  imports: [RouterLink, Chatbot],
+  standalone: true,
+  imports: [RouterLink, Chatbot, CurrencyPipe],
   templateUrl: './user-page.html',
   styleUrl: './user-page.scss',
 })
-export class UserPage {
+export class UserPage implements OnInit {
   user!: UserModel;
   artworks: ArtworkModel[] = [];
+
   constructor(
     private httpService: HttpService,
     private route: ActivatedRoute,
@@ -21,7 +24,7 @@ export class UserPage {
 
   ngOnInit() {
     this.route.paramMap.subscribe((paramMap) => {
-      const id = paramMap.get('id')!;
+      const id = paramMap.get('id');
       if (id) {
         this.loadUser(id);
       }
@@ -36,13 +39,16 @@ export class UserPage {
           if (user.id) this.loadArtworks(user.id);
         }
       },
+      error: (err) => console.error('Error cargando perfil de artista:', err)
     });
   }
+
   loadArtworks(id: string) {
     this.httpService.getAllArtworksOfUser(id).subscribe({
       next: (artworks) => {
-        this.artworks = artworks.data;
+        this.artworks = artworks.data || [];
       },
+      error: (err) => console.error('Error cargando obras:', err)
     });
   }
 }

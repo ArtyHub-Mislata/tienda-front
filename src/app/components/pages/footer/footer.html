@@ -1,26 +1,59 @@
-<footer class="c-footer l-flex l-flex--align-center l-flex--justify-between">
-    
-    <div class="l-flex l-flex--row l-flex--align-center">
-        <div class="c-footer__logo-icon">
-            <img src="images/logo.png" alt="Logo Artyhub"/> 
+<footer class="c-footer">
+    <div class="c-footer__container">
+        
+        <div class="c-footer__col">
+            <div class="c-footer__brand">
+                <div class="c-footer__logo-icon">
+                    <img src="images/logo.png" alt="ArtyHub Logo"/> 
+                </div>
+                <span class="c-footer__title g--font-montserrat-arabic">ARTYHUB</span>
+            </div>
+            <div>
+                <p class="c-footer__tagline">Curando emociones.</p>
+                <p class="c-footer__tagline">Redefiniendo espacios.</p>
+                <p class="c-footer__tagline">Tu galería de arte digital premium.</p>
+            </div>
         </div>
-        <a class="c-footer__title g--font-montserrat-arabic fw-bold" href="#">ArtyHub</a>
-    </div>
 
-    <div class="l-flex l-flex--column l-flex--align-center l-flex--gap-1">
-        <a href="#" class="c-footer__link">Política de privacidad</a>
-        <a href="#" class="c-footer__link">Política de cookies</a>
-        <a href="#" class="c-footer__link">Aviso legal</a>
-    </div>
-
-    <div class="l-flex l-flex--column l-flex--align-center l-flex--gap-2">
-        <span class="c-footer__social-title">Contacto</span>
-        <div class="l-flex l-flex--gap-2">
-            <a href="https://www.instagram.com/" class="c-footer__social-icon"><img src="images/logo_ig.png" alt=""/></a>
-            <a href="https://www.facebook.com/" class="c-footer__social-icon"><img src="images/logo_fb.png" alt=""/></a>
-            <a href="https://x.com/" class="c-footer__social-icon"><img src="images/logo_x.png" alt=""/></a>
-            <a href="https://www.linkedin.com/" class="c-footer__social-icon"><img src="images/logo_ln.png" alt=""/></a>
+        <div class="c-footer__col">
+            <h4 class="c-footer__heading g--font-montserrat-arabic">EXPLORAR</h4>
+            <nav class="c-footer__nav">
+                <a routerLink="artworks" class="c-footer__link">Colección Completa</a>
+                <a routerLink="profile" class="c-footer__link">Mi Perfil</a>
+                <a routerLink="cart" class="c-footer__link">Carrito de Compras</a>
+            </nav>
         </div>
+
+        <div class="c-footer__col">
+            <h4 class="c-footer__heading g--font-montserrat-arabic">LEGAL</h4>
+            <nav class="c-footer__nav">
+                <a class="c-footer__link">Política de Privacidad</a>
+                <a class="c-footer__link">Términos y Condiciones</a>
+                <a class="c-footer__link">Política de Cookies</a>
+                <a class="c-footer__link">Aviso Legal</a>
+            </nav>
+        </div>
+
+        <div class="c-footer__col">
+            <h4 class="c-footer__heading g--font-montserrat-arabic">CONECTA</h4>
+            <div class="c-footer__socials">
+                <a href="https://instagram.com" target="_blank" class="c-footer__social-icon"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://twitter.com" target="_blank" class="c-footer__social-icon"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="https://facebook.com" target="_blank" class="c-footer__social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+            </div>
+            
+            <div class="c-footer__newsletter">
+                <p class="c-footer__newsletter-text">Suscríbete a nuestra newsletter</p>
+                <div class="c-footer__input-group">
+                    <input type="email" placeholder="Tu email..." class="c-footer__input">
+                    <button class="c-footer__btn"><i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+
     </div>
 
+    <div class="c-footer__bottom">
+        <p>&copy; 2026 ArtyHub Gallery. Todos los derechos reservados.</p>
+    </div>
 </footer>

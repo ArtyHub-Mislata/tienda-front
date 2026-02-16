@@ -1,93 +1,81 @@
-<section class="c-cart g--padding-9">
-  <h1 class="c-cart__title fw-bold g--font-montserrat-arabic">TU CARRITO</h1>
+@if (showToast) {
+  <div class="c-toast c-toast--success" [class.is-hiding]="isHidingToast">
+    <i class="fa-solid fa-trash-can"></i>
+    <span>{{ toastMessage }}</span>
+  </div>
+}
 
-  <hr class="c-initial__hr" />
+<section class="c-cart-wrapper">
+  <div class="c-cart-container">
+    <h1 class="c-cart__title g--font-montserrat-arabic">TU COLECCIÓN</h1>
 
-  @if (cart) {
-    @if (cart!.cartItems!.length > 0) {
-      <div class="c-cart__list l-flex l-flex--column l-flex--gap-6">
-        @for (item of cart.cartItems; track item.id) {
-          <div class="c-cart-item l-flex l-flex--gap-6 l-flex--align-center">
-            <!-- Imagen -->
-            <img class="c-cart-item__image" [src]="item.artwork.image" [alt]="item.artwork.name" />
+    @if (cart) {
+      @if (cart.cartItems && cart.cartItems.length > 0) {
+        <div class="c-cart__layout">
+          
+          <div class="c-cart__items-column">
+            <div class="c-cart-header">
+              <span class="col-product">OBRA</span>
+              <span class="col-quantity">CANTIDAD</span>
+              <span class="col-price">TOTAL</span>
+              <span class="col-actions"></span> </div>
 
-            <!-- Info -->
-            <div class="c-cart-item__info l-flex l-flex--column l-flex--gap-2">
-              <h3 class="c-cart-item__title fw-bold">
-                {{ item.artwork.name }}
-              </h3>
+            <div class="c-cart-list">
+              @for (item of cart.cartItems; track item.id) {
+                <div class="c-cart-item">
+                  <div class="c-cart-item__product">
+                    <div class="c-cart-item__image-container">
+                      <img class="c-cart-item__image" [src]="item.artwork.image" [alt]="item.artwork.name" />
+                    </div>
+                    <div class="c-cart-item__info">
+                      <h3 class="c-cart-item__name">{{ item.artwork.name }}</h3>
+                      <p class="c-cart-item__artist">por {{ item.artwork.userDto.name }}</p>
+                    </div>
+                  </div>
 
-              <p class="c-cart-item__artist">
-                {{ item.artwork.userDto.name }}
-              </p>
+                  <div class="c-cart-item__quantity">
+                    <div class="c-quantity-control">
+                      <button class="c-quantity-control__btn" (click)="decreaseQuantity(item)" [disabled]="item.quantity <= 1">−</button>
+                      <span class="c-quantity-control__value">{{ item.quantity }}</span>
+                      <button class="c-quantity-control__btn" (click)="increaseQuantity(item)" [disabled]="item.artwork.stock <= item.quantity">+</button>
+                    </div>
+                  </div>
 
-              <p class="c-cart-item__price">
-                {{ item.artwork.price | currency: 'EUR' }}
-              </p>
-            </div>
+                  <div class="c-cart-item__price">
+                    <span class="g--font-questrial">{{ item.artwork.price * item.quantity | currency:'EUR' }}</span>
+                  </div>
 
-            <!-- Cantidad -->
-            <!-- Cantidad -->
-            <div
-              class="c-cart-item__quantity l-flex l-flex--column l-flex--align-center l-flex--gap-2"
-            >
-              <span>Cantidad</span>
-
-              <div class="c-cart-item__controls l-flex l-flex--align-center l-flex--gap-3">
-                <button
-                  class="c-cart-item__btn c-cart-item__btn--minus"
-                  (click)="decreaseQuantity(item)"
-                  [disabled]="item.quantity <= 1"
-                >
-                  −
-                </button>
-
-                <strong>{{ item.quantity }}</strong>
-
-                <button
-                  class="c-cart-item__btn c-cart-item__btn--plus"
-                  (click)="increaseQuantity(item)"
-                  [disabled]="item.artwork.stock <= item.quantity"
-                >
-                  +
-                </button>
-              </div>
-            </div>
-
-            <!-- Subtotal -->
-            <div class="c-cart-item__subtotal">
-              {{ item.artwork.price * item.quantity | currency: 'EUR' }}
+                  <div class="c-cart-item__actions">
+                    <button class="c-btn-remove" (click)="removeItem(item)" title="Eliminar obra">
+                      <i class="fa-light fa-trash-can"></i>
+                    </button>
+                  </div>
+                </div>
+              }
             </div>
           </div>
-        }
-      </div>
 
-      <hr class="c-initial__hr" />
+          <aside class="c-cart__summary-column">
+            <div class="c-summary-card">
+              <h2 class="c-summary-card__title g--font-montserrat-arabic">RESUMEN DEL PEDIDO</h2>
+              <div class="c-summary-card__row">
+                <span class="label">Subtotal</span>
+                <span class="value g--font-questrial">{{ total | currency:'EUR' }}</span>
+              </div>
+              <div class="c-summary-card__row border-top">
+                <span class="label total-label">TOTAL</span>
+                <span class="value total-amount g--font-questrial">{{ total | currency:'EUR' }}</span>
+              </div>
+              <div class="c-summary-card__actions">
+                <button class="c-btn-checkout" routerLink="/payment" [disabled]="cart.cartItems.length === 0">TRAMITAR PEDIDO</button>
+                <button class="c-btn-continue" routerLink="/artworks">SEGUIR COMPRANDO</button>
+              </div>
+            </div>
+          </aside>
 
-      <!-- Total -->
-      <div class="c-cart__footer l-flex l-flex--align-center l-flex--justify-between">
-        <div class="c-cart__total-wrapper">
-          <span class="c-cart__total-label">Total</span>
-          <strong class="c-cart__total-amount">{{ total | currency: 'EUR' }}</strong>
         </div>
-
-        <button
-          class="c-cart__checkout-btn"
-          routerLink="/payment"
-          [disabled]="cart.cartItems.length === 0"
-        >
-          TRAMITAR PEDIDO
-        </button>
-      </div>
-    } @else {
-      <div class="c-cart__empty l-flex l-flex--column l-flex--align-center g--padding-9">
-        <h3 class="fw-bold g--font-montserrat-arabic">Tu carrito está vacío</h3>
-        <p>Descubre obras únicas y empieza tu colección.</p>
-
-        <a c-button funcion="normal" importancia="primaria" tamano="grande" routerLink="/artworks">
-          Ver obras
-        </a>
-      </div>
+      } @else {
+        }
     }
-  }
+  </div>
 </section>

@@ -1,9 +1,9 @@
-<div class="chat-wrapper l-flex l-flex--column l-flex--align-end l-flex--justify-center g--margin-5" [class.open]="isOpen">
+<div class="chat-wrapper l-flex l-flex--column l-flex--align-end l-flex--justify-center" [class.open]="isOpen">
   <button class="chat-button" (click)="toggleChatbot()">
     @if (!isOpen) {
       <img src="images/chatbot.png" alt="Chatbot" class="chat-button__img"/>
     } @else {
-      <span>✖</span>
+      <span class="chat-button__span">✖</span>
     }
   </button>
   <div class="chat-window">

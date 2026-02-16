@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { UserModel } from '../../../models/UserModel';
 import { HttpService } from '../../../services/http-service';
@@ -7,11 +7,12 @@ import { CButton } from '../../ui/c-button/c-button';
 
 @Component({
   selector: 'c-header',
+  standalone: true,
   imports: [RouterLink, FormsModule, CButton],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
-export class Header {
+export class Header implements OnInit {
   isLogged: boolean = false;
   user!: UserModel;
   showLogoutMessage: boolean = false;
@@ -37,7 +38,6 @@ export class Header {
       next: (user) => {
         if (user) this.user = user;
         this.cd.detectChanges();
-
         console.log('USUARIO' + user?.id);
       },
     });
@@ -60,6 +60,7 @@ export class Header {
         this.isHiding = false;
       }, 500);
     }, 3000);
+
     this.httpService.logout().subscribe();
     this.router.navigate(['/login']);
   }

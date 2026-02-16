@@ -1,85 +1,102 @@
 @if (showMessage) {
-  <div class="c-logout l-flex l-flex--align-center g--padding-4" [class.is-hiding]="isHiding">
-    <i class="fas fa-info-circle g--margin-right-3"></i>
-    Pago realizado correctamente.
+  <div class="c-payment__toast c-payment__toast--success" [class.is-hiding]="isHiding">
+    <i class="fas fa-check-circle"></i>
+    <span>Adquisición confirmada correctamente.</span>
   </div>
 }
 
 @if (showErrorMessage) {
-  <div class="c-logout l-flex l-flex--align-center g--padding-4" [class.is-hiding]="isHiding">
-    <i class="fas fa-info-circle g--margin-right-3"></i>
-    Error al realizar el pago. Inténtalo de nuevo.
+  <div class="c-payment__toast c-payment__toast--error" [class.is-hiding]="isHiding">
+    <i class="fas fa-exclamation-circle"></i>
+    <span>Transacción declinada. Verifique sus datos.</span>
   </div>
 }
 
-<div class="c-auth l-flex l-flex--column l-flex--align-center l-flex--justify-center">
-  <h1 class="c-auth__title g--margin-bottom-7 g--margin-top-9">ARTYHUB</h1>
-
-  <div class="c-auth__card g--padding-8">
-    <form class="l-flex l-flex--column l-flex--gap-4">
-      <div class="c-auth__form-group">
-        <label class="c-auth__form-group-label">*Número de tarjeta:</label>
-        <input
-          type="text"
-          name="cardNumber"
-          class="c-auth__form-group-input"
-          placeholder="1234 5678 9012 3456"
-          [(ngModel)]="payment.cardDto.nTarget"
-          required
-        />
+<div class="c-payment">
+  <div class="c-payment__container">
+    
+    <div class="c-payment__card">
+      
+      <div class="c-payment__header">
+        <h1 class="c-payment__header-title">Checkout</h1>
+        <p class="c-payment__header-subtitle">Pasarela Segura de Pagos</p>
+        <div class="c-payment__header-divider"></div>
       </div>
 
-      <div class="c-auth__form-group">
-        <label class="c-auth__form-group-label">*Fecha de expiración:</label>
-        <input
-          type="text"
-          name="expirationDate"
-          class="c-auth__form-group-input"
-          placeholder="MM/YY"
-          [(ngModel)]="payment.cardDto.dateExpiration"
-          required
-        />
-      </div>
+      <form (ngSubmit)="onSubmit(paymentForm)" #paymentForm="ngForm">
+        
+        <div class="c-payment__group">
+          <label>Titular de la tarjeta</label>
+          <input
+            type="text"
+            name="cardHolderName"
+            placeholder="COMO APARECE EN LA TARJETA"
+            [(ngModel)]="payment.cardDto.holderName"
+            required
+            uppercase
+          />
+        </div>
 
-      <div class="c-auth__form-group">
-        <label class="c-auth__form-group-label">*CVV:</label>
-        <input
-          type="text"
-          name="cvv"
-          class="c-auth__form-group-input"
-          placeholder="123"
-          [(ngModel)]="payment.cardDto.cvv"
-          required
-        />
-      </div>
+        <div class="c-payment__group">
+          <label>Número de Tarjeta</label>
+          <input
+            type="text"
+            name="cardNumber"
+            placeholder="0000 0000 0000 0000"
+            [(ngModel)]="payment.cardDto.nTarget"
+            required
+            minlength="16"
+            maxlength="19"
+          />
+        </div>
 
-      <div class="c-auth__form-group">
-        <label class="c-auth__form-group-label">*Nombre del titular:</label>
-        <input
-          type="text"
-          name="cardHolderName"
-          class="c-auth__form-group-input"
-          placeholder="Nombre del titular"
-          [(ngModel)]="payment.cardDto.holderName"
-          required
-        />
-      </div>
+        <div class="c-payment__row">
+          <div class="c-payment__group">
+            <label>Expiración (MM/YY)</label>
+            <input
+              type="text"
+              name="expirationDate"
+              placeholder="MM/YY"
+              [(ngModel)]="payment.cardDto.dateExpiration"
+              required
+              maxlength="5"
+            />
+          </div>
 
-      <strong>Total: {{ payment.amount | currency: 'EUR' }}</strong>
+          <div class="c-payment__group">
+            <label>CVC / CVV</label>
+            <input
+              type="password"
+              name="cvv"
+              placeholder="123"
+              [(ngModel)]="payment.cardDto.cvv"
+              required
+              maxlength="4"
+            />
+          </div>
+        </div>
 
-      <div class="l-flex g--margin-top-4 l-flex--justify-center">
+        <div class="c-payment__total">
+          <span>Importe Total</span>
+          <strong>{{ payment.amount | currency: 'EUR' : 'symbol' : '1.2-2' }}</strong>
+        </div>
+
         <button
-          c-button
-          funcion="normal"
-          importancia="primaria"
-          tamano="pequeno"
-          class="c-auth__button--half"
+          class="c-payment__btn"
           type="submit"
-          (click)="onSubmit()"
-        >
-          Pagar
+          [disabled]="paymentForm.invalid || loading">
+          @if(loading) {
+            Procesando...
+          } @else {
+            Confirmar Pago
+          }
         </button>
-      </div>
-    </form>
+
+        <div style="text-align: center; margin-top: 1.5rem;">
+            <a routerLink="/" style="color: #666; font-size: 0.75rem; text-decoration: none; letter-spacing: 2px;">CANCELAR OPERACIÓN</a>
+        </div>
+
+      </form>
+    </div>
   </div>
 </div>

@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
 import { HttpService } from '../../../services/http-service';
 import { UserModel } from '../../../models/UserModel';
-import { Router, RouterLink } from '@angular/router';
-
-import { CButton } from '../../../components/ui/c-button/c-button';
+import { Router } from '@angular/router';
 import { UserRegisterRequest } from '../../../models/UserRegisterRequest';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'register-page',
-  imports: [CButton, FormsModule],
+  standalone: true,
+  imports: [FormsModule],
   templateUrl: './register-page.html',
   styleUrl: './register-page.scss',
 })
@@ -23,19 +22,30 @@ export class RegisterPage {
     imageProfileUrl: '',
   };
 
+  loading: boolean = false;
+
   constructor(
     private httpService: HttpService,
     private router: Router,
   ) {}
 
-  onRegister() {
+  onRegister(form: NgForm) {
+    if (form.invalid) {
+        form.control.markAllAsTouched();
+        return;
+    }
+
+    this.loading = true;
+
     this.httpService.register(this.user).subscribe({
       next: (user: UserModel) => {
-        console.log(user);
+        this.loading = false;
+        console.log('Registro exitoso:', user);
         this.router.navigate(['/login']);
       },
       error: (error) => {
-        console.log(error);
+        this.loading = false;
+        console.error('Error en registro:', error);
       },
     });
   }

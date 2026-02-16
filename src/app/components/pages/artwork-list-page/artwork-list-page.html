@@ -1,87 +1,92 @@
-<div class="l-flex l-flex--justify-center g--margin-y-9">
-    <div class="c-search-container">
-        <span class="c-search-container__icon">
-            <i class="fa-solid fa-magnifying-glass"></i>
-        </span>
-        <input 
-            type="text"
-            class="c-search-container__input"
-            placeholder="Buscar por nombre, artista, precio..."
-            [(ngModel)]="searchText">
+<div class="artwork-page-wrapper">
+    
+    <div class="c-search-header">
+        <div class="c-search-container">
+            <span class="c-search-container__icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </span>
+            <input 
+                type="text"
+                class="c-search-container__input"
+                placeholder="Buscar obras, artistas..."
+                [(ngModel)]="searchText">
+        </div>
     </div>
-</div>
 
-
-<div class="main-container" [class.is-collapsed]="isSidebarCollapsed">
-    <div class="c-sidebar">
-        <button class="c-sidebar__toggle" (click)="toggleSidebar()">
-            {{ isSidebarCollapsed ? '>' : '<' }}
-        </button>
-        @if (!isSidebarCollapsed) {
-            <nav class="c-sidebar__nav">
-                <h2 class="c-sidebar__title">Categorías</h2>
-                <ul class="c-sidebar__list">
-                    <li class="c-sidebar__list-item">
-                        <span (click)="selectedCategory('Todas')">Todas</span>
-                    </li>
-                    @for (category of categories; track category.id) {
-                        <li class="c-sidebar__list-item">
-                            <span (click)="selectedCategory(category.name)">{{ category.name }}</span>
+    <div class="main-layout" [class.is-collapsed]="isSidebarCollapsed">
+        
+        <aside class="c-sidebar">
+            <button class="c-sidebar__toggle" (click)="toggleSidebar()">
+                <i class="fa-solid" [class.fa-chevron-right]="isSidebarCollapsed" [class.fa-chevron-left]="!isSidebarCollapsed"></i>
+            </button>
+            
+            @if (!isSidebarCollapsed) {
+                <nav class="c-sidebar__nav">
+                    <h2 class="c-sidebar__title">COLECCIÓN</h2>
+                    <ul class="c-sidebar__list">
+                        <li class="c-sidebar__item" (click)="selectedCategory('Todas')" [class.active]="true">
+                            <span class="c-sidebar__link">Todas las obras</span>
                         </li>
-                    }
-                </ul>
-            </nav>
-        }
-    </div>
-    <div id="content" class="content">
-        <div class="l-flex l-flex--justify-center">
-            <div class="g--width-1400">
+                        @for (category of categories; track category.id) {
+                            <li class="c-sidebar__item" (click)="selectedCategory(category.name)">
+                                <span class="c-sidebar__link">{{ category.name }}</span>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+            }
+        </aside>
 
-                <div class="l-flex l-flex--justify-between g--margin-bottom-9">
+        <main class="content-area">
+            
+            @if (filteredArtworks.length > 0) {
+                <section class="featured-grid">
                     @for (artwork of filteredArtworks.slice(0, 2); track artwork.id) {
-                        <div class="c-artwork-card c-artwork-card--featured" routerLink="/artworks/{{ artwork.id }}">
-                            <div class="c-artwork-card--featured__image-container">
-                                <img [src]="artwork.image" [alt]="artwork.name" class="c-artwork-card__img">
-                                <div class="c-artwork-card__info l-flex l-flex--justify-between l-flex--align-center">
-                                    <span class="c-artwork-card--featured__name">{{ artwork.name }}</span>
-                                    <span class="c-artwork-card__price g--font-questrial">{{ artwork.price }}€</span>
+                        <article class="c-artwork-card c-artwork-card--featured" routerLink="/artworks/{{ artwork.id }}">
+                            <div class="c-artwork-card__image-wrapper">
+                                <img [src]="artwork.image" [alt]="artwork.name" loading="lazy">
+                                <div class="c-artwork-card__overlay">
+                                    <span class="c-artwork-card__view-btn">VER OBRA</span>
                                 </div>
                             </div>
-                        </div>
+                            <div class="c-artwork-card__details">
+                                <h3 class="c-artwork-card__title">{{ artwork.name }}</h3>
+                                <p class="c-artwork-card__price">{{ artwork.price }}€</p>
+                            </div>
+                        </article>
                     }
+                </section>
+            }
+
+            @if (filteredArtworks.slice(2).length > 0) {
+                <div class="section-divider">
+                    <span>DESCUBRE MÁS</span>
                 </div>
 
-                @if (filteredArtworks.slice(2).length > 0) {
-                
-                    <h2 class="c-section-title fw-bold">
-                        Descubre nuevas obras:
-                    </h2>
-
-                    <div class="l-flex l-flex--wrap l-flex--justify-start l-flex--gap-9">
-                        
-                            @for (artwork of (showAllArtworks ? filteredArtworks.slice(2) : filteredArtworks.slice(2, 10)); track artwork.id) {
-                                <div class="c-artwork-card" routerLink="/artworks/{{ artwork.id }}">
-                                    <div class="c-artwork-card__image-container">
-                                        <img [src]="artwork.image" [alt]="artwork.name" class="c-artwork-card__img">
-                                        <div class="c-artwork-card__info l-flex l-flex--justify-between l-flex--align-center">
-                                            <span class="c-artwork-card__name">{{ artwork.name }}</span>
-                                            <span class="c-artwork-card__price g--font-questrial">{{ artwork.price }}€</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-                    </div>
-
-                    @if (filteredArtworks.length > 10) {
-                        <div class="l-flex l-flex--justify-center g--margin-top-9 g--margin-bottom-9">
-                            <button c-button funcion="normal" importancia="primaria" tamano="grande" class="g--margin-top-9 c-button--show-all" (click)="toggleShowAllArtworks()">
-                                {{ showAllArtworks ? 'Ver menos' : 'Ver todo' }}
-                            </button>
-                        </div>
+                <section class="gallery-grid">
+                    @for (artwork of (showAllArtworks ? filteredArtworks.slice(2) : filteredArtworks.slice(2, 10)); track artwork.id) {
+                        <article class="c-artwork-card" routerLink="/artworks/{{ artwork.id }}">
+                            <div class="c-artwork-card__image-wrapper">
+                                <img [src]="artwork.image" [alt]="artwork.name" loading="lazy">
+                            </div>
+                            <div class="c-artwork-card__details">
+                                <h3 class="c-artwork-card__title">{{ artwork.name }}</h3>
+                                <p class="c-artwork-card__price">{{ artwork.price }}€</p>
+                            </div>
+                        </article>
                     }
+                </section>
+
+                @if (filteredArtworks.length > 10) {
+                    <div class="load-more-container">
+                        <button class="c-btn-outline" (click)="toggleShowAllArtworks()">
+                            {{ showAllArtworks ? 'VER MENOS' : 'VER TODA LA COLECCIÓN' }}
+                        </button>
+                    </div>
                 }
-            </div>
-        </div>
+            }
+        </main>
+
     </div>
 </div>
 <c-chatbot></c-chatbot>
