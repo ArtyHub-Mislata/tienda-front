@@ -3,7 +3,6 @@ import { ArtworkListPage } from './components/pages/artwork-list-page/artwork-li
 import { ArtworkPage } from './components/pages/artwork-page/artwork-page';
 import { LoginPage } from './components/pages/login-page/login-page';
 import { ProfilePage } from './components/pages/profile-page/profile-page';
-import { loginGuardGuard } from './guards/login-guard-guard';
 import { RegisterPage } from './components/pages/register-page/register-page';
 import { UserPage } from './components/pages/user-page/user-page';
 

@@ -118,6 +118,10 @@ export class HttpService {
     return this.httpClient.get<UserModel | null>(`${this.url}/users/${id}`);
   }
 
+  updateUser(user: UserModel): Observable<UserModel> {
+    return this.httpClient.put<UserModel>(`${this.url}/users/${user.id}`, user);
+  }
+
   getCartOfUser(): Observable<CartModel> {
     return this.httpClient.get<CartModel>(`${this.url}/users/cart`);
   }

@@ -1,155 +1,143 @@
-@use "../01_utilities/" as *;
+@use "../01_utilities" as *;
 
-.c-user-profile {
+.users-gallery-wrapper {
     min-height: 100vh;
     padding-top: 120px;
+    padding-bottom: 4rem;
     background-color: #0e0e0e;
     color: var(--mlt-sys-color-blanco-8);
-    background-image: url('../../../../public/images/foto_inicio.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    position: relative;
-
-    &::before {
-        content: '';
-        position: absolute;
-        top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0, 0, 0, 0.88);
-        z-index: 1;
-    }
-
-    &__container {
-        position: relative;
-        z-index: 2;
-    }
+    font-family: var(--mlt-sys-font-montserrat-arabic);
 }
 
-.c-profile-sidebar {
+.c-user-sidebar {
+    flex: 0 0 350px;
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(12px);
-    flex: 0 0 350px;
+    backdrop-filter: blur(10px);
     height: fit-content;
     position: sticky;
     top: 120px;
 
-    &__avatar-container {
+    &__avatar {
         width: 180px;
         height: 180px;
+        overflow: hidden;
         border: 1px solid var(--mlt-sys-color-amarillo-7);
         padding: 5px;
-        overflow: hidden;
-    }
-
-    &__avatar {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        filter: grayscale(30%);
-    }
-
-    &__name {
-        font-size: 1.8rem;
-        font-weight: 300;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        color: var(--mlt-sys-color-blanco-8);
-        text-align: center;
-    }
-
-    &__description {
-        color: #888;
-        text-align: center;
-        line-height: 1.8;
-        font-size: 0.9rem;
-        font-weight: 300;
-        font-style: italic;
+        background: transparent;
+        
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(40%);
+            transition: filter 0.5s ease;
+            &:hover { filter: grayscale(0%); }
+        }
     }
 }
 
-.c-user-profile__section-title {
-    font-size: 1.2rem;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    color: var(--mlt-sys-color-blanco-8);
-    border-left: 3px solid var(--mlt-sys-color-amarillo-7);
-    padding-left: 1.5rem;
-    margin-bottom: 3rem;
-}
+.c-user-sidebar__info {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 1rem;
 
-.c-artwork-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2.5rem;
-}
-
-.c-artwork-card {
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    height: 100%;
-
-    &:hover {
-        border-color: var(--mlt-sys-color-amarillo-7);
-        transform: translateY(-8px);
-        background: rgba(255, 255, 255, 0.03);
-    }
-
-    &__image-container {
-        width: 100%;
-        height: 280px;
-        overflow: hidden;
-        position: relative;
-    }
-
-    &__img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 1.2s ease;
-    }
-
-    &:hover &__img {
-        transform: scale(1.1);
-    }
-
-    &__body {
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    &__title {
-        font-size: 0.85rem;
+    &__label {
+        display: block;
+        font-size: 0.65rem;
         letter-spacing: 2px;
         text-transform: uppercase;
-        color: var(--mlt-sys-color-blanco-8);
-        margin-bottom: 0.8rem;
+        color: #666;
+        margin-bottom: 0.5rem;
     }
 
-    &__price {
-        font-size: 1.1rem;
-        color: var(--mlt-sys-color-amarillo-7);
+    &__value {
+        font-size: 0.95rem;
         font-weight: 300;
+        color: var(--mlt-sys-color-blanco-8);
+        line-height: 1.4;
     }
 }
 
-.btn-back-gallery {
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.2);
-    color: #888;
+.gallery-section-title {
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 5px;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 0.7rem;
-    padding: 1rem;
-    transition: all 0.3s;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--mlt-sys-color-amarillo-7);
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+.c-user-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
     justify-content: center;
-    gap: 10px;
+
+    @media (min-width: 600px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @media (min-width: 900px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.c-user-artwork-card--small {
+    width: 260px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.4s ease;
+    cursor: pointer;
 
     &:hover {
         border-color: var(--mlt-sys-color-amarillo-7);
-        color: var(--mlt-sys-color-blanco-8);
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.02);
+    }
+    
+    .c-user-artwork-card__image-container {
+        height: 200px;
+        overflow: hidden;
+        
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+    }
+
+    &:hover .c-user-artwork-card__image-container img {
+        transform: scale(1.1);
+    }
+    
+    .c-user-artwork-card__body {
+        text-align: left;
+    }
+
+    .c-user-artwork-card__title {
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 0.3rem;
+    }
+
+    .c-user-artwork-card__artist {
+        font-size: 0.7rem;
+        color: #666;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .c-user-artwork-card__price-tag {
+        color: var(--mlt-sys-color-amarillo-7);
+        font-size: 1rem;
+        margin-top: 1rem;
+        border-top: 1px solid rgba(255,255,255,0.05);
+        padding-top: 0.5rem;
     }
 }

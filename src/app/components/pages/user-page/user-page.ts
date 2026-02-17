@@ -7,7 +7,7 @@ import { Chatbot } from '../chatbot/chatbot';
 import { CurrencyPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-user-page',
+  selector: 'user-page',
   standalone: true,
   imports: [RouterLink, Chatbot, CurrencyPipe],
   templateUrl: './user-page.html',

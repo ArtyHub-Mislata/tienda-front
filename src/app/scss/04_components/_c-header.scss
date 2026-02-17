@@ -20,6 +20,7 @@
 
     &__title, &__artworks, &__log-out, &__log-in {
         transition: all 0.2s;
+        margin-left: 10px;
         &:hover {
             color: var(--mlt-sys-color-alternativo-6);
             transform: scale(1.05);

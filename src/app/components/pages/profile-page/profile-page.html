@@ -4,33 +4,70 @@
       <div class="g--width-1200 l-flex l-flex--gap-9">
         
         <aside class="c-profile-sidebar l-flex l-flex--column l-flex--align-center g--padding-8">
+          
+          @if (!isEditing) {
+            <div class="g--width-100 l-flex l-flex--justify-end g--margin-bottom-4">
+               <button class="btn-icon-action" (click)="toggleEdit()" title="Editar Perfil">
+                 <i class="fas fa-pencil-alt"></i> Editar
+               </button>
+            </div>
+          }
+
           <div class="c-profile-sidebar__avatar g--margin-bottom-7">
             <img [src]="user.imageProfileUrl" alt="Retrato del artista" />
           </div>
 
-          <div class="c-profile-sidebar__info l-flex l-flex--column l-flex--gap-5 g--width-100">
+          <div class="l-flex l-flex--column l-flex--gap-5 g--width-100">
+            
             <div class="c-info-item">
               <span class="c-info-item__label">Usuario</span>
-              <p class="c-info-item__value">{{ user.name }}</p>
+              @if (!isEditing) {
+                <p class="c-info-item__value">{{ user.name }}</p>
+              } @else {
+                <input type="text" class="c-form-input" [(ngModel)]="tempUser.name" placeholder="Nombre">
+              }
             </div>
             
             <div class="c-info-item">
               <span class="c-info-item__label">Canal de Contacto</span>
-              <p class="c-info-item__value">{{ user.email }}</p>
+              <p class="c-info-item__value">{{ user.email }}</p> 
             </div>
             
             <div class="c-info-item">
               <span class="c-info-item__label">Residencia</span>
-              <p class="c-info-item__value">{{ user.address }}</p>
+              @if (!isEditing) {
+                <p class="c-info-item__value">{{ user.address }}</p>
+              } @else {
+                <input type="text" class="c-form-input" [(ngModel)]="tempUser.address" placeholder="Dirección">
+              }
             </div>
             
             <div class="c-info-item">
               <span class="c-info-item__label">Semblanza Curatorial</span>
-              <p class="c-info-item__value">{{ user.description }}</p>
+              @if (!isEditing) {
+                <p class="c-info-item__value">{{ user.description }}</p>
+              } @else {
+                <textarea class="c-form-input c-form-input--area" [(ngModel)]="tempUser.description" rows="4"></textarea>
+              }
             </div>
+
+             @if (isEditing) {
+              <div class="c-info-item">
+                <span class="c-info-item__label">URL Imagen Perfil</span>
+                <input type="text" class="c-form-input" [(ngModel)]="tempUser.imageProfileUrl">
+              </div>
+             }
           </div>
 
-          <div class="g--width-100 g--margin-top-9">
+          <div class="g--width-100 g--margin-top-9 l-flex l-flex--column l-flex--gap-4">
+            
+            @if (isEditing) {
+              <div class="l-flex l-flex--gap-4">
+                <button class="btn-action btn-action--save l-flex--1" (click)="saveChanges()">Guardar</button>
+                <button class="btn-action btn-action--cancel l-flex--1" (click)="cancelEdit()">Cancelar</button>
+              </div>
+            }
+
             <button
               class="btn-logout-profile g--width-100"
               (click)="logOut()"
@@ -45,14 +82,14 @@
             <h2 class="gallery-main-title">Colección Personal</h2>
           </header>
 
-          <div class="l-flex l-flex--wrap l-flex--gap-6">
+          <div class="c-profile-gallery-grid">
             @for (artwork of artworks; track artwork.id) {
               <div
                 class="c-artwork-card c-artwork-card--small"
                 [routerLink]="['/artworks', artwork.id]"
               >
                 <div class="c-artwork-card__image-container">
-                  <img [src]="artwork.image" class="c-artwork-card__img" alt="Obra de arte" />
+                  <img [src]="artwork.image" alt="Obra de arte" />
                 </div>
                 <div class="c-artwork-card__body g--padding-4">
                   <p class="c-artwork-card__title">{{ artwork.name }}</p>

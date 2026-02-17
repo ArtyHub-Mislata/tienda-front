@@ -1,50 +1,66 @@
 @if (user) {
-  <div class="c-user-profile">
-    <div class="c-user-profile__container l-flex l-flex--justify-center g--padding-bottom-9">
-      <div class="g--width-1200 l-flex l-flex--gap-9 l-flex--wrap">
+  <div class="users-gallery-wrapper">
+    <div class="l-flex l-flex--justify-center">
+      <div class="g--width-1200 l-flex l-flex--gap-9">
         
-        <aside class="c-profile-sidebar l-flex l-flex--column l-flex--align-center g--padding-8">
-          <div class="c-profile-sidebar__avatar-container g--margin-bottom-6">
-            <img [src]="user.imageProfileUrl" alt="Retrato del artista" class="c-profile-sidebar__avatar" />
+        <aside class="c-user-sidebar l-flex l-flex--column l-flex--align-center g--padding-8">
+          <div class="c-user-sidebar__avatar g--margin-bottom-7">
+            <img [src]="user.imageProfileUrl" alt="Retrato del artista" />
           </div>
 
-          <div class="c-profile-sidebar__info g--width-100">
-            <h2 class="c-profile-sidebar__name g--margin-bottom-4">{{ user.name }}</h2>
-            <div style="width: 30px; height: 1px; background: var(--mlt-sys-color-amarillo-7); margin: 1.5rem auto;"></div>
-            <p class="c-profile-sidebar__description">{{ user.description }}</p>
+          <div class="l-flex l-flex--column l-flex--gap-5 g--width-100">
+            <div class="c-user-sidebar__info">
+              <span class="c-user-sidebar__info__label">Usuario</span>
+              <p class="c-user-sidebar__info__value">{{ user.name }}</p>
+            </div>
+              
+            <div class="c-user-sidebar__info">
+              <span class="c-user-sidebar__info__label">Canal de Contacto</span>
+              <p class="c-user-sidebar__info__value">{{ user.email }}</p>
+            </div>
+            
+            <div class="c-user-sidebar__info">
+              <span class="c-user-sidebar__info__label">Residencia</span>
+              <p class="c-user-sidebar__info__value">{{ user.address }}</p>
+            </div>
+            
+            <div class="c-user-sidebar__info">
+              <span class="c-user-sidebar__info__label">Semblanza Curatorial</span>
+              <p class="c-user-sidebar__info__value">{{ user.description }}</p>
+            </div>
           </div>
 
-          <div class="g--margin-top-8 g--width-100">
-            <a routerLink="/" class="btn-back-gallery">
-              <i class="fa-thin fa-long-arrow-left"></i> Volver a la Galería
-            </a>
-          </div>
         </aside>
 
-        <main class="c-user-profile__content l-flex--1">
-          <h3 class="c-user-profile__section-title">Obras Disponibles</h3>
-          
-          <div class="c-artwork-grid">
+        <main class="l-flex--1">
+          <header>
+            <h2 class="gallery-section-title">Colección Personal</h2>
+          </header>
+
+          <div class="c-user-gallery-grid">
             @for (artwork of artworks; track artwork.id) {
-              <a [routerLink]="['/artworks', artwork.id]" class="g--text-decoration-none">
-                <div class="c-artwork-card">
-                  <div class="c-artwork-card__image-container">
-                    <img [src]="artwork.image" class="c-artwork-card__img" [alt]="artwork.name" />
-                  </div>
-                  <div class="c-artwork-card__body g--padding-5">
-                    <h4 class="c-artwork-card__title">{{ artwork.name }}</h4>
-                    <p class="c-artwork-card__price g--font-questrial">{{ artwork.price | currency:'EUR' }}</p>
-                  </div>
+              <div
+                class="c-user-artwork-card--small"
+                [routerLink]="['/artworks', artwork.id]"
+              >
+                <div class="c-user-artwork-card__image-container">
+                  <img [src]="artwork.image" alt="Obra de arte" />
                 </div>
-              </a>
-            } @empty {
-              <div class="l-flex l-flex--column l-flex--align-center g--padding-9" style="grid-column: 1 / -1; opacity: 0.3;">
-                <i class="fa-thin fa- connotations fa-3x g--margin-bottom-4"></i>
-                <p class="g--letter-spacing-2">No hay obras expuestas en este momento</p>
+                <div class="c-user-artwork-card__body g--padding-4">
+                  <p class="c-user-artwork-card__title">{{ artwork.name }}</p>
+                  <p class="c-user-artwork-card__artist">Pieza Certificada</p>
+                  <p class="c-user-artwork-card__price-tag g--font-questrial">{{ artwork.price | currency:'EUR' }}</p>
+                </div>
               </div>
+            } @empty {
+                <div class="l-flex l-flex--column l-flex--align-center g--margin-top-9" style="color: #444;">
+                    <i class="fas fa-palette fa-3x g--margin-bottom-4"></i>
+                    <p style="letter-spacing: 2px; text-transform: uppercase; font-size: 0.8rem;">La galería está vacía actualmente</p>
+                </div>
             }
           </div>
         </main>
+
       </div>
     </div>
   </div>

@@ -68,6 +68,21 @@
     display: inline-block;
 }
 
+.c-profile-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    justify-content: center;
+
+    @media (min-width: 600px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @media (min-width: 900px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
 .c-artwork-card--small {
     width: 260px;
     background: transparent;
@@ -121,6 +136,73 @@
         margin-top: 1rem;
         border-top: 1px solid rgba(255,255,255,0.05);
         padding-top: 0.5rem;
+    }
+}
+
+.c-form-input {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--mlt-sys-color-blanco-8);
+    padding: 8px 10px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.3s;
+
+    &:focus {
+        border-color: var(--mlt-sys-color-amarillo-7);
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    &--area {
+        resize: vertical;
+        min-height: 80px;
+    }
+}
+
+.btn-icon-action {
+    background: transparent;
+    border: none;
+    color: var(--mlt-sys-color-amarillo-7);
+    cursor: pointer;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.btn-action {
+    padding: 0.8rem;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.3s;
+
+    &--save {
+        background: var(--mlt-sys-color-amarillo-7);
+        color: #000;
+        font-weight: bold;
+        
+        &:hover {
+            background: #ffe066;
+        }
+    }
+
+    &--cancel {
+        background: transparent;
+        border: 1px solid #666;
+        color: #ccc;
+
+        &:hover {
+            border-color: #fff;
+            color: #fff;
+        }
     }
 }
 
