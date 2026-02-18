@@ -6,12 +6,11 @@ import { Chatbot } from "../chatbot/chatbot";
 import { RouterLink } from "@angular/router";
 import { Observable } from 'rxjs';
 import { CategoryModel } from '../../../models/CategoryModel';
-import { CButton } from '../../ui/c-button/c-button';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'artwork-list-page',
-  imports: [Chatbot, RouterLink, CButton, FormsModule  ],
+  imports: [Chatbot, RouterLink, FormsModule],
   templateUrl: './artwork-list-page.html',
   styleUrl: './artwork-list-page.scss',
 })
